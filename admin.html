@@ -144,13 +144,43 @@
   .form-actions { display:flex; gap:10px; flex-wrap:wrap; }
   .form-actions .btn { flex:1; min-width:120px; }
 
-  /* IMG ROW */
-  .img-row { display:flex; gap:10px; align-items:center; }
-  .img-row input { flex:1; }
-  .img-thumb { width:52px; height:52px; border-radius:6px; object-fit:cover; border:1px solid var(--border); display:none; flex-shrink:0; }
-  .img-thumb.show { display:block; }
+  /* IMG UPLOAD */
   .img-hint { font-size:.65rem; color:var(--muted); line-height:1.6; margin-top:10px; padding:10px 14px; background:rgba(212,175,55,.05); border:1px solid rgba(212,175,55,.12); border-radius:8px; }
   .img-hint strong { color:rgba(255,255,255,.7); font-weight:500; }
+
+  .upload-zone {
+    border:2px dashed rgba(212,175,55,.3); border-radius:12px;
+    padding:28px 20px; text-align:center; cursor:pointer;
+    transition:all .2s; background:rgba(212,175,55,.03);
+  }
+  .upload-zone:hover, .upload-zone.dragover { border-color:var(--gold); background:rgba(212,175,55,.07); }
+  .upload-zone input[type=file] { display:none; }
+  .upload-icon { font-size:2rem; margin-bottom:8px; }
+  .upload-label { font-size:.75rem; color:var(--muted); line-height:1.6; }
+  .upload-label strong { color:var(--gold); }
+
+  .photo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; }
+  .photo-item { position:relative; aspect-ratio:4/3; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
+  .photo-item img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-item .photo-num {
+    position:absolute; top:5px; left:5px;
+    background:rgba(0,0,0,.7); color:var(--gold);
+    font-size:.55rem; font-weight:600; padding:2px 6px; border-radius:4px;
+  }
+  .photo-item .photo-del {
+    position:absolute; top:5px; right:5px;
+    background:rgba(225,29,72,.8); color:white;
+    border:none; border-radius:4px; width:22px; height:22px;
+    cursor:pointer; font-size:.7rem; display:flex; align-items:center; justify-content:center;
+  }
+  .upload-progress {
+    margin-top:10px; font-size:.68rem; color:var(--muted);
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:8px; padding:10px 14px; display:none;
+  }
+  .upload-progress.show { display:block; }
+  .progress-bar-wrap { background:rgba(255,255,255,.08); border-radius:4px; height:4px; margin-top:8px; overflow:hidden; }
+  .progress-bar { background:var(--gold); height:100%; border-radius:4px; transition:width .3s; width:0%; }
 
   /* SAVING */
   .saving-overlay {
@@ -203,7 +233,7 @@
     </div>
     <div class="fg">
       <label>Repository</label>
-      <input type="text" id="inp-repo" value="poligiorgia/lb-horses">
+      <input type="text" id="inp-repo" value="giorgiapoli/lb-horses">
     </div>
     <button class="btn btn-gold" onclick="doSetup()">Entra nel pannello →</button>
   </div>
@@ -297,12 +327,30 @@
       </div>
 
       <div class="form-panel">
-        <div class="form-panel-title">Anteprima foto</div>
-        <div id="img-preview-area" style="display:none;">
-          <img id="img-preview-img" src="" alt="" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;border:1px solid var(--border);">
+        <div class="form-panel-title">Foto</div>
+
+        <!-- Upload zone -->
+        <div class="upload-zone" id="upload-zone" onclick="document.getElementById('photo-input').click()">
+          <input type="file" id="photo-input" accept="image/*" multiple>
+          <div class="upload-icon">📷</div>
+          <div class="upload-label">
+            <strong>Tocca per scegliere foto</strong><br>
+            dalla galleria o scatta una foto<br>
+            <span style="font-size:.6rem;">JPG, PNG · più foto selezionabili</span>
+          </div>
         </div>
-        <div id="img-no-preview" class="img-hint">
-          Inserisci la cartella sopra e aggiungi le foto nel repo GitHub come <strong>img/nome-cavallo/1.jpg</strong>. Le foto appariranno automaticamente nel sito.
+
+        <!-- Progress -->
+        <div class="upload-progress" id="upload-progress">
+          <span id="upload-progress-text">Caricamento foto…</span>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+        </div>
+
+        <!-- Foto già caricate -->
+        <div id="photo-grid" class="photo-grid"></div>
+
+        <div class="img-hint" id="img-hint-text" style="margin-top:12px;">
+          Le foto vengono caricate direttamente su GitHub nella cartella <strong>img/nome-cavallo/</strong> e appaiono subito nel sito. Devi prima compilare il campo <strong>Cartella immagini</strong> sopra.
         </div>
       </div>
 
@@ -439,7 +487,8 @@ function editHorse(id) {
   document.getElementById('f-status').value = h.status || 'for-sale';
   document.getElementById('f-notes').value = h.notes || '';
   document.getElementById('f-imgfolder').value = h.img_folder || '';
-  updateImgPreview(h.img_folder);
+  if (h.img_folder) loadExistingPhotos(h.img_folder);
+  else { uploadedPhotos = []; renderPhotoGrid(); }
   showTab('add');
   window.scrollTo(0,0);
 }
@@ -457,26 +506,180 @@ function resetForm() {
   });
   document.getElementById('f-gender').value = '';
   document.getElementById('f-status').value = 'for-sale';
-  updateImgPreview('');
+  uploadedPhotos = [];
+  renderPhotoGrid();
+}
+
+// ── PHOTO UPLOAD ──────────────────────────────────────────────────────────────
+let uploadedPhotos = []; // { filename, dataUrl }
+
+document.getElementById('photo-input').addEventListener('change', async function() {
+  const files = Array.from(this.files);
+  if (!files.length) return;
+
+  const folder = document.getElementById('f-imgfolder').value.trim();
+  if (!folder) {
+    showToast('Prima inserisci la cartella immagini (es: img/nome-cavallo)', 'err');
+    this.value = '';
+    return;
+  }
+
+  // Show progress
+  const prog = document.getElementById('upload-progress');
+  const bar  = document.getElementById('progress-bar');
+  const txt  = document.getElementById('upload-progress-text');
+  prog.classList.add('show');
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    txt.textContent = `Caricamento ${i+1} di ${files.length}: ${file.name}`;
+    bar.style.width = Math.round((i / files.length) * 100) + '%';
+
+    try {
+      // Find next available number
+      const nextNum = await getNextPhotoNumber(folder);
+      const filename = nextNum + '.jpg';
+      const base64 = await fileToBase64(file);
+      const base64data = base64.split(',')[1]; // strip data:...;base64,
+
+      // Upload to GitHub
+      await ghPutBinary(`${folder}/${filename}`, base64data, `Aggiunta foto ${filename} per ${folder}`);
+
+      uploadedPhotos.push({ filename: `${folder}/${filename}`, dataUrl: base64 });
+      renderPhotoGrid();
+    } catch(e) {
+      showToast('Errore upload: ' + e.message, 'err');
+    }
+  }
+
+  bar.style.width = '100%';
+  txt.textContent = `✓ ${files.length} foto caricate!`;
+  setTimeout(() => prog.classList.remove('show'), 2500);
+  this.value = '';
+});
+
+async function getNextPhotoNumber(folder) {
+  // List existing files in folder
+  try {
+    const contents = await ghGet(folder);
+    const nums = contents
+      .map(f => parseInt(f.name))
+      .filter(n => !isNaN(n));
+    return nums.length ? Math.max(...nums) + 1 : 1;
+  } catch(e) {
+    return 1; // folder doesn't exist yet
+  }
+}
+
+async function ghPutBinary(path, base64content, msg) {
+  // Check if file exists (to get SHA for update)
+  let sha = null;
+  try {
+    const existing = await ghGet(path);
+    sha = existing.sha;
+  } catch(e) { /* new file */ }
+
+  const body = { message: msg, content: base64content, branch: 'main' };
+  if (sha) body.sha = sha;
+
+  const r = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${CFG.token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `PUT error ${r.status}`); }
+  return r.json();
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    // Resize image before upload to keep files small
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderPhotoGrid() {
+  const grid = document.getElementById('photo-grid');
+  if (!uploadedPhotos.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = uploadedPhotos.map((p, i) => `
+    <div class="photo-item">
+      <img src="${p.dataUrl}" alt="">
+      <div class="photo-num">${i+1}</div>
+      <button class="photo-del" onclick="deletePhoto(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+async function deletePhoto(i) {
+  const p = uploadedPhotos[i];
+  if (!confirm(`Eliminare la foto ${i+1}?`)) return;
+  try {
+    // Get SHA of the file
+    const f = await ghGet(p.filename);
+    const r = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${p.filename}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `token ${CFG.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: `Eliminata foto ${p.filename}`, sha: f.sha, branch: 'main' })
+    });
+    if (!r.ok) throw new Error('Errore eliminazione');
+    uploadedPhotos.splice(i, 1);
+    renderPhotoGrid();
+    showToast('Foto eliminata', 'ok');
+  } catch(e) {
+    showToast('Errore: ' + e.message, 'err');
+  }
+}
+
+// Load existing photos when editing
+async function loadExistingPhotos(folder) {
+  uploadedPhotos = [];
+  if (!folder) { renderPhotoGrid(); return; }
+  try {
+    const contents = await ghGet(folder);
+    const imgFiles = contents
+      .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name))
+      .sort((a,b) => a.name.localeCompare(b.name));
+    // Show as previews using raw GitHub URL
+    uploadedPhotos = imgFiles.map(f => ({
+      filename: f.path,
+      dataUrl: `https://raw.githubusercontent.com/${CFG.repo}/main/${f.path}?t=${Date.now()}`
+    }));
+    renderPhotoGrid();
+  } catch(e) {
+    uploadedPhotos = [];
+    renderPhotoGrid();
+  }
 }
 
 document.getElementById('f-imgfolder').addEventListener('input', function() {
-  updateImgPreview(this.value.trim());
+  const folder = this.value.trim();
+  if (folder) loadExistingPhotos(folder);
+  else { uploadedPhotos = []; renderPhotoGrid(); }
 });
-
-function updateImgPreview(folder) {
-  const prev = document.getElementById('img-preview-area');
-  const noprev = document.getElementById('img-no-preview');
-  const img = document.getElementById('img-preview-img');
-  if (folder) {
-    img.src = folder + '/1.jpg';
-    img.onerror = () => { prev.style.display='none'; noprev.style.display='block'; };
-    img.onload = () => { prev.style.display='block'; noprev.style.display='none'; };
-  } else {
-    prev.style.display='none';
-    noprev.style.display='block';
-  }
-}
 
 // ── SAVE ──────────────────────────────────────────────────────────────────────
 async function saveHorse() {
