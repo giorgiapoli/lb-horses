@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "name": "Extra van Veldorheve",
+    "gender": "Mare",
+    "age": 6,
+    "bloodline": "O'Neill van Bischop × Animo",
+    "level": "1.25m–1.30m",
+    "notes": "GP prospect",
+    "status": "for-sale",
+    "img_folder": "img/extra-van-veldorheve"
+  },
+  {
+    "id": 2,
+    "name": "Austin WP Z",
+    "gender": "Gelding",
+    "age": 9,
+    "bloodline": "Akarad Hero × Stalypso",
+    "level": "1.45m–1.50m",
+    "notes": "",
+    "status": "for-sale",
+    "img_folder": "img/austin-wp-z"
+  },
+  {
+    "id": 3,
+    "name": "Goodnight Ballivor",
+    "gender": "Gelding",
+    "age": 6,
+    "bloodline": "Cookstown Royal Cavalier",
+    "level": "1.25m–1.30m",
+    "notes": "GP prospect",
+    "status": "for-sale",
+    "img_folder": "img/goodnight-ballivor"
+  },
+  {
+    "id": 4,
+    "name": "JM Maximus",
+    "gender": "Gelding",
+    "age": 7,
+    "bloodline": "Cornet Obolenski × Obos Quality",
+    "level": "1.25m–1.30m",
+    "notes": "",
+    "status": "for-sale",
+    "img_folder": "img/jm-maximus"
+  },
+  {
+    "id": 5,
+    "name": "Tomorrowland van het Eelshof",
+    "gender": "Gelding",
+    "age": 6,
+    "bloodline": "Falaise de Muze × Cicero Z",
+    "level": "1.25m",
+    "notes": "Amateur horse",
+    "status": "sold",
+    "img_folder": "img/tomorrowland-van-het-eelshof"
+  },
+  {
+    "id": 6,
+    "name": "Gucci de 4 Vents",
+    "gender": "Stallion",
+    "age": 3,
+    "bloodline": "Greco Sitte × I Am Moerhoeve Star",
+    "level": "",
+    "notes": "Super attitude · Very scope",
+    "status": "for-sale",
+    "img_folder": "img/gucci-de-4-vents"
+  },
+  {
+    "id": 7,
+    "name": "Chief Z",
+    "gender": "Gelding",
+    "age": 8,
+    "bloodline": "Cicero Z × Harley VDL",
+    "level": "1.30m–1.35m",
+    "notes": "Winner",
+    "status": "sold",
+    "img_folder": "img/chief-z"
+  },
+  {
+    "id": 8,
+    "name": "Chariando PS",
+    "gender": "Gelding",
+    "age": 9,
+    "bloodline": "Chacoon Blue × Carinue",
+    "level": "1.30m–1.35m",
+    "notes": "",
+    "status": "for-sale",
+    "img_folder": "img/chariando-ps"
+  },
+  {
+    "id": 9,
+    "name": "Stallion 2yo",
+    "gender": "Colt",
+    "age": 2,
+    "bloodline": "Mosito van het Hellenhof × Clinton",
+    "level": "",
+    "notes": "Nice type · Very good bloodlines",
+    "status": "for-sale",
+    "img_folder": "img/morosito"
+  },
+  {
+    "id": 10,
+    "name": "MyTeresa",
+    "gender": "Mare",
+    "age": 9,
+    "bloodline": "Mylord Carthago × Argentinus",
+    "level": "Up to 1.30m",
+    "notes": "Amateur horse · Italian bred",
+    "status": "for-sale",
+    "img_folder": "img/myteresa"
+  },
+  {
+    "id": 11,
+    "name": "Nihal della Boeme",
+    "gender": "Mare",
+    "age": 8,
+    "bloodline": "Canto × Indoctro",
+    "level": "Up to 1.30m",
+    "notes": "Careful and brave · Italian bred",
+    "status": "for-sale",
+    "img_folder": "img/nihal-della-boeme"
+  },
+  {
+    "id": 12,
+    "name": "Coronata",
+    "gender": "Mare",
+    "age": 5,
+    "bloodline": "Topinambur × Nadir di San Patrignano",
+    "level": "1.10m",
+    "notes": "Nice type · Good bloodline",
+    "status": "for-sale",
+    "img_folder": "img/coronata"
+  },
+  {
+    "id": 13,
+    "name": "Reve",
+    "gender": "Gelding",
+    "age": 5,
+    "bloodline": "Sunday de Riverland × Vicompte de la Lodge",
+    "level": "1.15m",
+    "notes": "Brave · Easy to ride · Good bloodline · Italian bred",
+    "status": "for-sale",
+    "img_folder": "img/reve"
+  },
+  {
+    "id": 14,
+    "name": "Koraline Emme",
+    "gender": "Mare",
+    "age": 9,
+    "bloodline": "Malito de Reves × Quidam de Revel",
+    "level": "1.60m (dam)",
+    "notes": "Pregnant by Heart to Heart (Heartbreaker × Denzel van 't Meulenhof). Dam competed at 1.60m; sire line traces to Funky Music (1.60m).",
+    "status": "for-sale",
+    "img_folder": "img/koraline-emme"
+  }
+]
