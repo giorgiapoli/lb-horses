@@ -99,17 +99,6 @@
     "img_folder": "img/morosito"
   },
   {
-    "id": 11,
-    "name": "Nihal della Boeme",
-    "gender": "Mare",
-    "age": 8,
-    "bloodline": "Canto × Indoctro",
-    "level": "Up to 1.30m",
-    "notes": "Careful and brave · Italian bred",
-    "status": "for-sale",
-    "img_folder": "img/nihal-della-boeme"
-  },
-  {
     "id": 12,
     "name": "Coronata",
     "gender": "Mare",
