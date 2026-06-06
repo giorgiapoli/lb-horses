@@ -99,17 +99,6 @@
     "img_folder": "img/morosito"
   },
   {
-    "id": 10,
-    "name": "MyTeresa",
-    "gender": "Mare",
-    "age": 9,
-    "bloodline": "Mylord Carthago × Argentinus",
-    "level": "Up to 1.30m",
-    "notes": "Amateur horse · Italian bred",
-    "status": "for-sale",
-    "img_folder": "img/myteresa"
-  },
-  {
     "id": 11,
     "name": "Nihal della Boeme",
     "gender": "Mare",
