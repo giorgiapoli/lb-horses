@@ -108,5 +108,16 @@
     "notes": "Pregnant by Heart to Heart (Heartbreaker × Denzel van 't Meulenhof). Dam competed at 1.60m; sire line traces to Funky Music (1.60m).",
     "status": "for-sale",
     "img_folder": "img/koraline-emme"
+  },
+  {
+    "id": 1780780777255,
+    "name": "V8 2G Z",
+    "gender": "Mare",
+    "age": 2019,
+    "bloodline": "Vigo d'Arsouille x Moujik de Sohan",
+    "level": "1.40-1.50 m",
+    "status": "for-sale",
+    "notes": "Bloody type, scope and careful",
+    "img_folder": "v8-2gz"
   }
 ]
