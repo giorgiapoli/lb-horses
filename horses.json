@@ -99,17 +99,6 @@
     "img_folder": "img/morosito"
   },
   {
-    "id": 13,
-    "name": "Reve",
-    "gender": "Gelding",
-    "age": 5,
-    "bloodline": "Sunday de Riverland × Vicompte de la Lodge",
-    "level": "1.15m",
-    "notes": "Brave · Easy to ride · Good bloodline · Italian bred",
-    "status": "for-sale",
-    "img_folder": "img/reve"
-  },
-  {
     "id": 14,
     "name": "Koraline Emme",
     "gender": "Mare",
