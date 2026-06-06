@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LB Horses — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4af37;
+    --dark: #0a0a0a;
+    --panel: #141414;
+    --border: rgba(255,255,255,0.1);
+    --text: #f5f5f4;
+    --muted: rgba(255,255,255,0.5);
+    --green: #22c55e;
+    --red: #e11d48;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--dark); color:var(--text); font-family:Inter,sans-serif; font-weight:300; min-height:100vh; font-size:15px; }
+
+  /* ── SETUP ── */
+  #setup {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; padding:32px 20px;
+    background: radial-gradient(600px at 50% 0%, rgba(212,175,55,.12), transparent);
+  }
+  .setup-logo { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:600; color:var(--gold); margin-bottom:6px; }
+  .setup-sub { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:36px; }
+  .setup-card { background:var(--panel); border:1px solid var(--border); padding:28px 24px; width:100%; max-width:440px; border-radius:16px; }
+  .setup-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--text); margin-bottom:6px; }
+  .setup-hint { font-size:.72rem; color:var(--muted); line-height:1.7; margin-bottom:22px; }
+  .setup-hint a { color:var(--gold); }
+  .setup-hint strong { color:rgba(255,255,255,.8); font-weight:500; }
+
+  /* ── FORM ELEMENTS ── */
+  .fg { margin-bottom:16px; }
+  label { display:block; font-size:.6rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  input, select, textarea {
+    width:100%; font-family:Inter,sans-serif; font-size:.85rem; font-weight:400;
+    padding:11px 14px; border:1px solid var(--border); background:rgba(255,255,255,.05);
+    color:var(--text); outline:none; transition:border .2s; border-radius:8px;
+    -webkit-appearance:none;
+  }
+  input:focus, select:focus, textarea:focus { border-color:var(--gold); }
+  select option { background:#1a1a1a; color:var(--text); }
+  textarea { resize:vertical; min-height:80px; }
+
+  .btn {
+    font-family:Inter,sans-serif; font-size:.7rem; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; border:none;
+    padding:13px 20px; cursor:pointer; transition:all .2s; border-radius:8px; width:100%;
+  }
+  .btn-gold { background:var(--gold); color:#000; }
+  .btn-gold:hover { opacity:.9; }
+  .btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); }
+  .btn-outline:hover { border-color:rgba(255,255,255,.3); color:var(--text); }
+  .btn-sm { padding:9px 16px; width:auto; font-size:.62rem; }
+  .btn-green { background:rgba(34,197,94,.15); color:var(--green); border:1px solid rgba(34,197,94,.3); }
+  .btn-red { background:rgba(225,29,72,.12); color:var(--red); border:1px solid rgba(225,29,72,.25); }
+
+  /* ── APP ── */
+  #app { display:none; }
+  .app-header {
+    background:#0d0d0d; border-bottom:1px solid var(--border);
+    padding:14px 18px; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:50;
+  }
+  .app-logo { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); }
+  .app-logo span { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-family:Inter; font-weight:400; vertical-align:middle; margin-left:6px; }
+  .icon-btn {
+    font-family:Inter,sans-serif; font-size:.6rem; font-weight:500; letter-spacing:.1em;
+    text-transform:uppercase; background:rgba(255,255,255,.05);
+    border:1px solid var(--border); color:var(--muted);
+    padding:7px 13px; cursor:pointer; border-radius:6px;
+  }
+  .icon-btn:hover { color:var(--text); border-color:rgba(255,255,255,.2); }
+
+  .content { padding:20px 16px 120px; max-width:720px; margin:0 auto; }
+
+  /* STATUS */
+  .status-bar {
+    background:var(--panel); border:1px solid var(--border);
+    padding:13px 18px; margin-bottom:20px; display:flex;
+    align-items:center; justify-content:space-between; flex-wrap:wrap;
+    gap:10px; border-radius:10px;
+  }
+  .status-text { font-size:.72rem; color:var(--muted); }
+  .status-text strong { color:var(--text); font-weight:500; }
+  .dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+  .dot-ok { background:var(--green); box-shadow:0 0 6px var(--green); }
+  .dot-err { background:var(--red); }
+
+  /* TABS */
+  .tabs { display:flex; gap:4px; margin-bottom:22px; background:var(--panel); border:1px solid var(--border); padding:5px; border-radius:10px; }
+  .tab {
+    font-family:Inter,sans-serif; font-size:.65rem; font-weight:500; letter-spacing:.1em;
+    text-transform:uppercase; padding:9px 14px; border:none; background:transparent;
+    cursor:pointer; color:var(--muted); border-radius:7px; transition:all .2s; flex:1; text-align:center;
+  }
+  .tab.active { background:rgba(212,175,55,.15); color:var(--gold); }
+  .tab:hover:not(.active) { color:var(--text); }
+
+  /* HORSE LIST */
+  .horse-list { display:flex; flex-direction:column; gap:10px; }
+  .horse-item {
+    background:var(--panel); border:1px solid var(--border);
+    display:flex; align-items:center; gap:13px; padding:13px 16px; border-radius:12px;
+    transition:border .2s;
+  }
+  .horse-item:hover { border-color:rgba(255,255,255,.18); }
+  .horse-thumb {
+    width:60px; height:60px; flex-shrink:0; border-radius:8px;
+    background:rgba(255,255,255,.06); display:flex; align-items:center;
+    justify-content:center; font-size:1.5rem; overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .horse-thumb img { width:100%; height:100%; object-fit:cover; }
+  .horse-info { flex:1; min-width:0; }
+  .horse-name { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .horse-meta { font-size:.65rem; color:var(--muted); margin-top:2px; }
+  .badge {
+    font-size:.57rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    padding:3px 9px; border-radius:20px; white-space:nowrap;
+  }
+  .badge-sale { background:rgba(212,175,55,.15); color:var(--gold); border:1px solid rgba(212,175,55,.25); }
+  .badge-sold { background:rgba(225,29,72,.1); color:#f87171; border:1px solid rgba(225,29,72,.2); }
+  .h-actions { display:flex; gap:7px; flex-shrink:0; }
+  .act-btn {
+    font-size:.6rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase;
+    background:rgba(255,255,255,.05); border:1px solid var(--border);
+    color:var(--muted); padding:7px 12px; cursor:pointer; border-radius:6px;
+    font-family:Inter,sans-serif; transition:all .2s; white-space:nowrap;
+  }
+  .act-btn:hover { color:var(--text); border-color:rgba(255,255,255,.2); }
+  .act-del { color:rgba(225,29,72,.7); border-color:rgba(225,29,72,.2); }
+  .act-del:hover { color:var(--red); border-color:var(--red); background:rgba(225,29,72,.08); }
+
+  /* FORM PANEL */
+  .form-panel { background:var(--panel); border:1px solid var(--border); padding:22px 20px; border-radius:14px; margin-bottom:16px; }
+  .form-panel-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .form-actions .btn { flex:1; min-width:120px; }
+
+  /* IMG ROW */
+  .img-row { display:flex; gap:10px; align-items:center; }
+  .img-row input { flex:1; }
+  .img-thumb { width:52px; height:52px; border-radius:6px; object-fit:cover; border:1px solid var(--border); display:none; flex-shrink:0; }
+  .img-thumb.show { display:block; }
+  .img-hint { font-size:.65rem; color:var(--muted); line-height:1.6; margin-top:10px; padding:10px 14px; background:rgba(212,175,55,.05); border:1px solid rgba(212,175,55,.12); border-radius:8px; }
+  .img-hint strong { color:rgba(255,255,255,.7); font-weight:500; }
+
+  /* SAVING */
+  .saving-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,.75);
+    z-index:200; align-items:center; justify-content:center;
+  }
+  .saving-overlay.show { display:flex; }
+  .saving-box {
+    background:var(--panel); border:1px solid var(--border); padding:28px 36px;
+    text-align:center; border-radius:16px; font-size:.85rem; color:var(--text);
+  }
+  .spinner { display:inline-block; width:18px; height:18px; border:2px solid rgba(255,255,255,.15); border-top-color:var(--gold); border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:8px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  /* TOAST */
+  .toast {
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(120px);
+    font-size:.75rem; font-weight:400; padding:12px 22px; z-index:9999;
+    border-radius:8px; transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+    white-space:nowrap; max-width:90vw; overflow:hidden; text-overflow:ellipsis;
+    background:#1a1a1a; border:1px solid rgba(255,255,255,.12); color:var(--text);
+  }
+  .toast.show { transform:translateX(-50%) translateY(0); }
+  .toast.ok { background:rgba(34,197,94,.15); border-color:rgba(34,197,94,.3); color:var(--green); }
+  .toast.err { background:rgba(225,29,72,.12); border-color:rgba(225,29,72,.3); color:#f87171; }
+
+  .empty-list { text-align:center; padding:50px 20px; color:var(--muted); font-family:'Playfair Display',serif; font-size:1.15rem; font-style:italic; }
+
+  @media(max-width:420px) {
+    .form-row { grid-template-columns:1fr; }
+    .h-actions { flex-direction:column; gap:5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════ SETUP ════════════ -->
+<div id="setup">
+  <div class="setup-logo">L.B. Horses</div>
+  <div class="setup-sub">Admin Panel</div>
+  <div class="setup-card">
+    <div class="setup-title">Accesso</div>
+    <div class="setup-hint">
+      Inserisci il tuo <strong>GitHub Personal Access Token</strong> per aggiornare il sito dal telefono.<br><br>
+      Per crearlo: <a href="https://github.com/settings/tokens/new?scopes=repo&description=LB+Horses+Admin" target="_blank">github.com → Settings → Tokens → Generate</a> — seleziona solo il permesso <strong>repo</strong>. Rimane salvato solo sul tuo dispositivo.
+    </div>
+    <div class="fg">
+      <label>GitHub Token</label>
+      <input type="password" id="inp-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+    </div>
+    <div class="fg">
+      <label>Repository</label>
+      <input type="text" id="inp-repo" value="poligiorgia/lb-horses">
+    </div>
+    <button class="btn btn-gold" onclick="doSetup()">Entra nel pannello →</button>
+  </div>
+</div>
+
+<!-- ════════════ APP ════════════ -->
+<div id="app">
+  <div class="app-header">
+    <div class="app-logo">L.B. Horses <span>admin</span></div>
+    <div style="display:flex;gap:8px;">
+      <button class="icon-btn" onclick="openSite()">🌐 Sito</button>
+      <button class="icon-btn" onclick="doLogout()">Esci</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="status-bar">
+      <div class="status-text">
+        <span class="dot dot-ok" id="sdot"></span>
+        Connesso a <strong id="srepo"></strong> · <strong id="scount"></strong> cavalli
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="loadData()">↻ Ricarica</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" id="tab-btn-list" onclick="showTab('list')">📋 Cavalli</button>
+      <button class="tab" id="tab-btn-add" onclick="showTab('add')">＋ Aggiungi</button>
+    </div>
+
+    <!-- ── LIST TAB ── -->
+    <div id="tab-list">
+      <div id="list-container"><div class="empty-list">Caricamento…</div></div>
+    </div>
+
+    <!-- ── ADD/EDIT TAB ── -->
+    <div id="tab-add" style="display:none;">
+      <div class="form-panel">
+        <div class="form-panel-title" id="form-heading">Nuovo cavallo</div>
+        <input type="hidden" id="f-id">
+
+        <div class="fg">
+          <label>Nome *</label>
+          <input type="text" id="f-name" placeholder="Es: Austin WP Z">
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Sesso</label>
+            <select id="f-gender">
+              <option value="">— seleziona —</option>
+              <option>Mare</option>
+              <option>Gelding</option>
+              <option>Stallion</option>
+              <option>Colt</option>
+              <option>Filly</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Età (anni)</label>
+            <input type="number" id="f-age" placeholder="7" min="0" max="30">
+          </div>
+        </div>
+        <div class="fg">
+          <label>Bloodline (padre × madre)</label>
+          <input type="text" id="f-bloodline" placeholder="Es: Cornet Obolenski × Obos Quality">
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Livello / Level</label>
+            <input type="text" id="f-level" placeholder="Es: 1.30m–1.35m">
+          </div>
+          <div class="fg">
+            <label>Stato</label>
+            <select id="f-status">
+              <option value="for-sale">For Sale ✓</option>
+              <option value="sold">Sold</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Note / highlights</label>
+          <input type="text" id="f-notes" placeholder="Es: GP prospect · Amateur horse · Italian bred">
+        </div>
+        <div class="fg">
+          <label>Cartella immagini nel repo (img_folder)</label>
+          <input type="text" id="f-imgfolder" placeholder="img/nome-cavallo">
+          <div style="font-size:.62rem;color:var(--muted);margin-top:5px;line-height:1.5;">
+            Metti le foto nel repo GitHub in questa cartella, nominale <strong style="color:rgba(255,255,255,.6)">1.jpg</strong>, <strong style="color:rgba(255,255,255,.6)">2.jpg</strong>, ecc.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <div class="form-panel-title">Anteprima foto</div>
+        <div id="img-preview-area" style="display:none;">
+          <img id="img-preview-img" src="" alt="" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;border:1px solid var(--border);">
+        </div>
+        <div id="img-no-preview" class="img-hint">
+          Inserisci la cartella sopra e aggiungi le foto nel repo GitHub come <strong>img/nome-cavallo/1.jpg</strong>. Le foto appariranno automaticamente nel sito.
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-gold" onclick="saveHorse()">✓ Salva cavallo</button>
+        <button class="btn btn-outline" onclick="cancelEdit()">Annulla</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<div class="saving-overlay" id="saving-overlay">
+  <div class="saving-box">
+    <div><span class="spinner"></span> Salvataggio…</div>
+    <div style="font-size:.68rem;color:var(--muted);margin-top:8px;">Aggiornamento sito pubblico in corso</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let CFG = {};
+let horses = [];
+let fileSHA = null;
+let editingId = null;
+
+// ── SETUP ─────────────────────────────────────────────────────────────────────
+function doSetup() {
+  const token = document.getElementById('inp-token').value.trim();
+  const repo  = document.getElementById('inp-repo').value.trim();
+  if (!token || !repo) { showToast('Inserisci token e repository', 'err'); return; }
+  CFG = { token, repo };
+  localStorage.setItem('lbh_cfg', JSON.stringify(CFG));
+  startApp();
+}
+
+function doLogout() {
+  localStorage.removeItem('lbh_cfg');
+  location.reload();
+}
+
+// ── GITHUB API ────────────────────────────────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`, {
+    headers: { 'Authorization': `token ${CFG.token}`, 'Accept': 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error(`GitHub ${r.status} on ${path}`);
+  return r.json();
+}
+
+async function ghPut(path, content, sha, msg) {
+  const body = { message: msg, content: btoa(unescape(encodeURIComponent(content))), branch: 'main' };
+  if (sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${CFG.repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: { 'Authorization': `token ${CFG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `PUT error ${r.status}`); }
+  return r.json();
+}
+
+// ── LOAD ──────────────────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const f = await ghGet('horses.json');
+    fileSHA = f.sha;
+    horses = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g,'')))));
+    renderList();
+    document.getElementById('scount').textContent = horses.length;
+    document.getElementById('sdot').className = 'dot dot-ok';
+  } catch(e) {
+    document.getElementById('sdot').className = 'dot dot-err';
+    showToast('Errore: ' + e.message, 'err');
+    if (horses.length === 0) {
+      document.getElementById('list-container').innerHTML = '<div class="empty-list">Impossibile caricare i dati.<br>Verifica token e repo.</div>';
+    }
+  }
+}
+
+// ── RENDER LIST ───────────────────────────────────────────────────────────────
+function renderList() {
+  const c = document.getElementById('list-container');
+  if (!horses.length) { c.innerHTML = '<div class="empty-list">Nessun cavallo ancora.<br>Usa "＋ Aggiungi" per iniziare.</div>'; return; }
+
+  const sorted = [...horses].sort((a,b) => {
+    if (a.status==='sold' && b.status!=='sold') return 1;
+    if (a.status!=='sold' && b.status==='sold') return -1;
+    return 0;
+  });
+
+  c.innerHTML = `<div class="horse-list">${sorted.map(h => {
+    const imgSrc = h.img_folder ? h.img_folder + '/1.jpg' : '';
+    const thumbHtml = imgSrc
+      ? `<div class="horse-thumb"><img src="${imgSrc}" onerror="this.style.display='none'" alt=""></div>`
+      : `<div class="horse-thumb">🐴</div>`;
+    const isSold = h.status === 'sold';
+    return `
+      <div class="horse-item">
+        ${thumbHtml}
+        <div class="horse-info">
+          <div class="horse-name">${h.name}</div>
+          <div class="horse-meta">${[h.gender, h.age ? h.age+' y' : '', h.bloodline].filter(Boolean).join(' · ')}</div>
+          <div class="horse-meta" style="margin-top:3px;">${h.level || ''}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0;">
+          <span class="badge ${isSold ? 'badge-sold' : 'badge-sale'}">${isSold ? 'Sold' : 'For Sale'}</span>
+          <div class="h-actions">
+            <button class="act-btn" onclick="editHorse(${h.id})">Modifica</button>
+            ${isSold
+              ? `<button class="act-btn btn-green" style="font-size:.58rem;" onclick="toggleStatus(${h.id})">↩ Rimetti in vendita</button>`
+              : `<button class="act-btn" style="color:#f87171;border-color:rgba(225,29,72,.25);" onclick="toggleStatus(${h.id})">Segna venduto</button>`
+            }
+            <button class="act-btn act-del" onclick="deleteHorse(${h.id})">✕</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('')}</div>`;
+}
+
+// ── EDIT ──────────────────────────────────────────────────────────────────────
+function editHorse(id) {
+  const h = horses.find(x => x.id === id);
+  if (!h) return;
+  editingId = id;
+  document.getElementById('form-heading').textContent = 'Modifica: ' + h.name;
+  document.getElementById('f-id').value = id;
+  document.getElementById('f-name').value = h.name || '';
+  document.getElementById('f-gender').value = h.gender || '';
+  document.getElementById('f-age').value = h.age || '';
+  document.getElementById('f-bloodline').value = h.bloodline || '';
+  document.getElementById('f-level').value = h.level || '';
+  document.getElementById('f-status').value = h.status || 'for-sale';
+  document.getElementById('f-notes').value = h.notes || '';
+  document.getElementById('f-imgfolder').value = h.img_folder || '';
+  updateImgPreview(h.img_folder);
+  showTab('add');
+  window.scrollTo(0,0);
+}
+
+function cancelEdit() {
+  resetForm();
+  showTab('list');
+}
+
+function resetForm() {
+  editingId = null;
+  document.getElementById('form-heading').textContent = 'Nuovo cavallo';
+  ['f-id','f-name','f-age','f-bloodline','f-level','f-notes','f-imgfolder'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-gender').value = '';
+  document.getElementById('f-status').value = 'for-sale';
+  updateImgPreview('');
+}
+
+document.getElementById('f-imgfolder').addEventListener('input', function() {
+  updateImgPreview(this.value.trim());
+});
+
+function updateImgPreview(folder) {
+  const prev = document.getElementById('img-preview-area');
+  const noprev = document.getElementById('img-no-preview');
+  const img = document.getElementById('img-preview-img');
+  if (folder) {
+    img.src = folder + '/1.jpg';
+    img.onerror = () => { prev.style.display='none'; noprev.style.display='block'; };
+    img.onload = () => { prev.style.display='block'; noprev.style.display='none'; };
+  } else {
+    prev.style.display='none';
+    noprev.style.display='block';
+  }
+}
+
+// ── SAVE ──────────────────────────────────────────────────────────────────────
+async function saveHorse() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { showToast('Inserisci il nome del cavallo', 'err'); return; }
+
+  const h = {
+    id: editingId || Date.now(),
+    name,
+    gender: document.getElementById('f-gender').value,
+    age: parseInt(document.getElementById('f-age').value) || null,
+    bloodline: document.getElementById('f-bloodline').value.trim(),
+    level: document.getElementById('f-level').value.trim(),
+    status: document.getElementById('f-status').value,
+    notes: document.getElementById('f-notes').value.trim(),
+    img_folder: document.getElementById('f-imgfolder').value.trim()
+  };
+
+  if (editingId) {
+    const i = horses.findIndex(x => x.id === editingId);
+    if (i !== -1) horses[i] = h;
+  } else {
+    horses.push(h);
+  }
+
+  await commit(editingId ? `Aggiornato: ${name}` : `Aggiunto: ${name}`);
+  resetForm();
+  showTab('list');
+}
+
+async function toggleStatus(id) {
+  const h = horses.find(x => x.id === id);
+  if (!h) return;
+  h.status = h.status === 'sold' ? 'for-sale' : 'sold';
+  await commit(h.status === 'sold' ? `${h.name} → Sold` : `${h.name} → For Sale`);
+}
+
+async function deleteHorse(id) {
+  const h = horses.find(x => x.id === id);
+  if (!h || !confirm(`Eliminare ${h.name}?`)) return;
+  horses = horses.filter(x => x.id !== id);
+  await commit(`Eliminato: ${h.name}`);
+}
+
+async function commit(msg) {
+  showSaving();
+  try {
+    const res = await ghPut('horses.json', JSON.stringify(horses, null, 2), fileSHA, msg);
+    fileSHA = res.content.sha;
+    document.getElementById('scount').textContent = horses.length;
+    renderList();
+    showToast('✓ ' + msg + ' — sito aggiornato!', 'ok');
+  } catch(e) {
+    showToast('Errore: ' + e.message, 'err');
+    await loadData(); // rollback
+  } finally {
+    hideSaving();
+  }
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────────────
+function showTab(tab) {
+  document.getElementById('tab-list').style.display = tab === 'list' ? 'block' : 'none';
+  document.getElementById('tab-add').style.display  = tab === 'add'  ? 'block' : 'none';
+  document.getElementById('tab-btn-list').className = 'tab' + (tab === 'list' ? ' active' : '');
+  document.getElementById('tab-btn-add').className  = 'tab' + (tab === 'add'  ? ' active' : '');
+  if (tab === 'add' && !editingId) resetForm();
+  window.scrollTo(0,0);
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function showSaving() { document.getElementById('saving-overlay').classList.add('show'); }
+function hideSaving()  { document.getElementById('saving-overlay').classList.remove('show'); }
+
+let toastTimer;
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  clearTimeout(toastTimer);
+  requestAnimationFrame(() => t.classList.add('show'));
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function openSite() {
+  const [user, repo] = CFG.repo.split('/');
+  window.open(`https://${user}.github.io/${repo}/`, '_blank');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function startApp() {
+  document.getElementById('setup').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('srepo').textContent = CFG.repo;
+  loadData();
+}
+
+const saved = localStorage.getItem('lbh_cfg');
+if (saved) {
+  try {
+    CFG = JSON.parse(saved);
+    startApp();
+  } catch(e) { localStorage.removeItem('lbh_cfg'); }
+}
+</script>
+</body>
+</html>
