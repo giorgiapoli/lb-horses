@@ -99,17 +99,6 @@
     "img_folder": "img/morosito"
   },
   {
-    "id": 12,
-    "name": "Coronata",
-    "gender": "Mare",
-    "age": 5,
-    "bloodline": "Topinambur × Nadir di San Patrignano",
-    "level": "1.10m",
-    "notes": "Nice type · Good bloodline",
-    "status": "for-sale",
-    "img_folder": "img/coronata"
-  },
-  {
     "id": 13,
     "name": "Reve",
     "gender": "Gelding",
