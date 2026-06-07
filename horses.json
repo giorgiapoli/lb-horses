@@ -89,13 +89,13 @@
   },
   {
     "id": 9,
-    "name": "Stallion 2yo",
-    "gender": "Colt",
-    "age": 2,
+    "name": "Morosito",
+    "gender": "Gelding",
+    "age": 2024,
     "bloodline": "Mosito van het Hellenhof × Clinton",
     "level": "",
-    "notes": "Nice type · Very good bloodlines",
     "status": "for-sale",
+    "notes": "Nice type · Very good bloodlines",
     "img_folder": "img/morosito"
   },
   {
