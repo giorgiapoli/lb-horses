@@ -152,5 +152,16 @@
     "status": "sold",
     "notes": "Green mare - Top prospect",
     "img_folder": "img/Sibelle"
+  },
+  {
+    "id": 1786641886729,
+    "name": "Castlelawn Dan",
+    "gender": "Gelding",
+    "year": 2019,
+    "bloodline": "Castlelawn Capitain Jr x Kannan",
+    "level": "1.30-1.35 m",
+    "status": "for-sale",
+    "notes": "Competitive horse for any type of riders",
+    "img_folder": "img/castlelawn"
   }
 ]
