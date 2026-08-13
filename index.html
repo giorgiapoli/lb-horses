@@ -4,143 +4,180 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>L.B. Horses — Showjumpers for Sale Worldwide</title>
-  <meta name="description" content="L.B. Horses sources and sells elite showjumpers worldwide. Based in San Cesario sul Panaro (Modena), Italy. Global shipping." />
+  <meta name="description" content="L.B. Horses sources, produces and sells quality showjumpers worldwide. Based in San Cesario sul Panaro (Modena), Italy. Global shipping." />
   <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:title" content="L.B. Horses — Showjumpers for Sale Worldwide" />
+  <meta property="og:description" content="Sourcing, producing and selling quality showjumpers. Modena, Italy. Worldwide shipping." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root { --gold: #d4af37; }
+    :root { --gold: #c9a24b; }
     html { scroll-behavior: smooth; }
-    body { background: #0a0a0a; color:#f5f5f4; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-    .serif { font-family: "Playfair Display", Georgia, "Times New Roman", serif; }
+    body { background:#0a0a0a; color:#ececea; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing:.005em; }
+    .serif { font-family:"Playfair Display", Georgia, "Times New Roman", serif; }
     .gold { color: var(--gold); }
     .bg-gold { background: var(--gold); }
     .ring-gold { --tw-ring-color: var(--gold); }
-    .gradient { background: radial-gradient(1000px 600px at 70% -20%, rgba(212,175,55,.15), rgba(0,0,0,0)), linear-gradient(180deg, rgba(212,175,55,.07), rgba(0,0,0,0)); }
-    .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(6px); }
-    .sold-ribbon { position:absolute; top:12px; left:-40px; transform: rotate(-45deg); background: #e11d48; color:white; padding:6px 48px; font-weight:700; letter-spacing:.05em; font-size:.75rem; box-shadow:0 8px 24px rgba(0,0,0,.5); }
-    .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.45); }
-    .media { aspect-ratio: 16/10; object-fit: cover; }
-    .img-placeholder { aspect-ratio:16/10; background: linear-gradient(135deg,#1a1a1a,#2a2a2a); display:flex; align-items:center; justify-content:center; font-size:3rem; color:#444; }
+    .eyebrow { letter-spacing:.28em; text-transform:uppercase; font-size:.68rem; color:#a9a9a4; }
+
+    .gradient { background: radial-gradient(1100px 640px at 72% -18%, rgba(201,162,75,.14), rgba(0,0,0,0)); }
+    .card { background: rgba(255,255,255,0.028); border:1px solid rgba(255,255,255,0.07); transition: border-color .35s ease, transform .35s ease, background .35s ease; }
+    .card:hover { border-color: rgba(201,162,75,.38); transform: translateY(-4px); background: rgba(255,255,255,0.045); }
+    .shadow-soft { box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+
+    /* image frame with hover zoom */
+    .media-wrap { overflow:hidden; }
+    .media-wrap img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+    .media-wrap:hover img { transform: scale(1.06); }
+    .media { aspect-ratio:16/10; object-fit:cover; width:100%; display:block; }
+    .img-placeholder { aspect-ratio:16/10; background:linear-gradient(135deg,#171717,#242422); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:#3a3a38; }
+
+    .sold-ribbon { position:absolute; top:14px; left:-42px; transform:rotate(-45deg); background:#9a1f36; color:#fff; padding:5px 48px; font-weight:600; letter-spacing:.08em; font-size:.66rem; box-shadow:0 8px 24px rgba(0,0,0,.55); z-index:2; }
+
+    /* header shrink on scroll */
+    #siteHeader { transition: padding .35s ease, background .35s ease, backdrop-filter .35s ease; }
+    #siteHeader.scrolled { background: rgba(8,8,8,.82); }
+    #siteHeader.scrolled .hbar { padding-top:.55rem; padding-bottom:.55rem; }
+    #siteHeader.scrolled .brand-title { font-size:1.05rem; }
+
+    /* scroll reveal */
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform; }
+    .reveal.in { opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; transition:none; }
+      .media-wrap:hover img { transform:none; }
+      html { scroll-behavior:auto; }
+    }
+
+    .link-underline { position:relative; }
+    .link-underline::after { content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
+    .link-underline:hover::after { width:100%; }
   </style>
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
 
   <!-- ── HEADER ── -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
-    <div class="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+  <header id="siteHeader" class="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur">
+    <div class="hbar mx-auto max-w-6xl px-4 py-3.5 flex items-center justify-between transition-all">
       <a href="#top" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-full bg-gold/90 grid place-items-center text-black font-black">LB</div>
+        <div class="w-8 h-8 rounded-full bg-gold grid place-items-center text-black font-semibold text-sm">LB</div>
         <div class="leading-tight">
-          <div class="serif text-xl font-semibold tracking-wide">L.B. Horses</div>
-          <div class="text-xs text-white/60">Showjumpers</div>
+          <div class="brand-title serif text-lg font-semibold tracking-wide transition-all">L.B. Horses</div>
+          <div class="text-[10px] uppercase tracking-[.22em] text-white/45">Showjumpers</div>
         </div>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#horses" class="hover:text-white/90 text-white/70">Horses</a>
-        <a href="#references" class="hover:text-white/90 text-white/70">Top References</a>
-        <a href="#about" class="hover:text-white/90 text-white/70">About</a>
-        <a href="#contact" class="hover:text-white/90 text-white/70">Contact</a>
+      <nav class="hidden md:flex items-center gap-7 text-[13px] text-white/60">
+        <a href="#horses" class="link-underline hover:text-white">Horses</a>
+        <a href="#references" class="link-underline hover:text-white">References</a>
+        <a href="#about" class="link-underline hover:text-white">About</a>
+        <a href="#contact" class="link-underline hover:text-white">Contact</a>
       </nav>
-      <div class="flex items-center gap-3">
-        <a href="https://wa.me/393664481244" class="hidden sm:inline-flex bg-gold text-black font-semibold px-4 py-2 rounded-full hover:opacity-90 shadow-soft" aria-label="WhatsApp">WhatsApp</a>
-        <a href="#contact" class="inline-flex border border-white/20 px-4 py-2 rounded-full hover:border-white/40">Enquire</a>
+      <div class="flex items-center gap-2.5">
+        <a href="https://wa.me/393664481244" class="hidden sm:inline-flex bg-gold text-black font-medium text-sm px-4 py-2 rounded-full hover:opacity-90 transition">WhatsApp</a>
+        <a href="#contact" class="inline-flex border border-white/20 text-sm px-4 py-2 rounded-full hover:border-white/45 transition">Enquire</a>
       </div>
     </div>
   </header>
 
   <!-- ── HERO ── -->
   <section id="top" class="relative overflow-hidden gradient">
-    <div class="mx-auto max-w-7xl px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h1 class="serif text-4xl md:text-6xl font-bold leading-tight"><span class="gold">L.B. Horses</span> — Elite Showjumpers for Sale Worldwide</h1>
-        <p class="mt-6 text-lg text-white/80">Based in San Cesario sul Panaro (Modena), Italy. We source, produce, and sell top-quality showjumpers with <span class="gold font-semibold">global shipping</span> and discreet service.</p>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#horses" class="bg-gold text-black font-semibold px-6 py-3 rounded-full hover:opacity-90 shadow-soft">Explore Horses</a>
-          <a href="#references" class="border border-white/20 px-6 py-3 rounded-full hover:border-white/40">Top References</a>
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div class="reveal">
+        <p class="eyebrow">Modena, Italy · Worldwide shipping</p>
+        <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.12] mt-4">Showjumpers, <span class="gold">sourced and produced</span> for sport.</h1>
+        <p class="mt-5 text-[15px] md:text-base text-white/70 max-w-lg leading-relaxed">We select young and proven horses, produce them through training and competition, and place them with riders worldwide — with transparent vetting and full shipping support.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#horses" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 shadow-soft transition">View available horses</a>
+          <a href="#references" class="border border-white/20 text-sm px-6 py-3 rounded-full hover:border-white/45 transition">Top references</a>
         </div>
+        <div id="heroStats" class="mt-9 flex gap-8 text-white/70"></div>
       </div>
-      <div class="relative">
-        <img src="img/hero/1.jpg" alt="Showjumper in action" class="media w-full rounded-2xl object-cover shadow-soft" onerror="this.style.display='none'" />
-        <div class="absolute -bottom-4 -right-4 bg-black/70 border border-white/10 rounded-xl p-4">
-          <div class="text-xs uppercase tracking-widest text-white/60">Headquarters</div>
-          <div class="font-medium">San Cesario sul Panaro · Modena · Italy</div>
+      <div class="relative reveal">
+        <div class="media-wrap rounded-2xl shadow-soft">
+          <img src="img/hero/1.jpg" alt="Showjumper in action" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+        </div>
+        <div class="absolute -bottom-4 -right-3 bg-black/80 border border-white/10 rounded-xl px-4 py-3 backdrop-blur">
+          <div class="eyebrow">Headquarters</div>
+          <div class="text-sm font-medium mt-0.5">San Cesario sul Panaro · Modena</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── HORSES FOR SALE ── -->
-  <section id="horses" class="mx-auto max-w-7xl px-4 py-16">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+  <section id="horses" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 reveal">
       <div>
-        <h2 class="serif text-3xl md:text-4xl font-bold">Available Horses</h2>
-        <p class="mt-2 text-white/70">All details are verified. Vetting and trial by appointment. Shipping worldwide.</p>
+        <p class="eyebrow">Catalogue</p>
+        <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Available horses</h2>
+        <p id="horsesSubtitle" class="mt-2 text-sm text-white/60">Verified details. Vetting and trial by appointment. Worldwide shipping.</p>
       </div>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-2.5">
         <input id="search" type="search" placeholder="Search name / bloodline"
-          class="bg-black/40 border border-white/15 px-4 py-2 rounded-lg focus:outline-none focus:ring ring-gold" />
-        <select id="statusFilter" class="bg-black/40 border border-white/15 px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
+          class="bg-black/40 border border-white/15 text-sm px-4 py-2 rounded-lg focus:outline-none focus:ring ring-gold w-full sm:w-56" />
+        <select id="statusFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
           <option value="all">All statuses</option>
-          <option value="for-sale">For Sale</option>
+          <option value="for-sale">For sale</option>
           <option value="sold">Sold</option>
         </select>
-        <select id="ageFilter" class="bg-black/40 border border-white/15 px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
+        <select id="ageFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
           <option value="all">All ages</option>
         </select>
       </div>
     </div>
 
-    <div id="horseGrid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- JS populated -->
-      <div class="col-span-3 text-center py-16 text-white/50 serif text-xl italic">Loading horses…</div>
+    <div id="horseGrid" class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full text-center py-16 text-white/40 serif italic">Loading horses…</div>
     </div>
 
+    <p id="noResults" class="hidden mt-8 text-center text-sm text-white/40 italic">No horses match your search.</p>
+
     <p class="mt-8 text-sm text-white/50">Looking for something specific?
-      <a href="#contact" class="gold underline">Tell us your brief</a> — we can source off-market horses as well.
+      <a href="#contact" class="gold link-underline">Tell us your brief</a> — we can source off-market horses as well.
     </p>
   </section>
 
   <!-- ── TOP REFERENCES ── -->
-  <section id="references" class="mx-auto max-w-7xl px-4 py-16">
-    <div class="flex items-end justify-between gap-6">
-      <div>
-        <h2 class="serif text-3xl md:text-4xl font-bold">Top References</h2>
-        <p class="mt-2 text-white/70">A selection of notable horses placed by L.B. Horses.</p>
-      </div>
+  <section id="references" class="mx-auto max-w-6xl px-4 py-14 md:py-16 border-t border-white/[.06]">
+    <div class="reveal">
+      <p class="eyebrow">Track record</p>
+      <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Top references</h2>
+      <p class="mt-2 text-sm text-white/60">A selection of notable horses placed by L.B. Horses.</p>
     </div>
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <article class="card rounded-2xl overflow-hidden">
-        <img src="img/references/maurice/1.jpg" alt="Maurice" class="media w-full" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/>
+      <article class="card rounded-2xl overflow-hidden reveal">
+        <div class="media-wrap"><img src="img/references/maurice/1.jpg" alt="Maurice" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
-          <h3 class="serif text-2xl font-semibold">Maurice</h3>
-          <ul class="mt-2 text-white/80 space-y-1">
+          <h3 class="serif text-xl font-semibold">Maurice</h3>
+          <ul class="mt-2 text-sm text-white/70 space-y-1">
             <li>Olympic reference · Gelding by <span class="gold">Thunder</span></li>
             <li>With Cian O'Connor</li>
           </ul>
         </div>
       </article>
 
-      <article class="card rounded-2xl overflow-hidden">
-        <img src="img/references/granit/1.jpg" alt="Granit" class="media w-full" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/>
+      <article class="card rounded-2xl overflow-hidden reveal">
+        <div class="media-wrap"><img src="img/references/granit/1.jpg" alt="Granit" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
-          <h3 class="serif text-2xl font-semibold">Granit</h3>
-          <ul class="mt-2 text-white/80 space-y-1">
+          <h3 class="serif text-xl font-semibold">Granit</h3>
+          <ul class="mt-2 text-sm text-white/70 space-y-1">
             <li>Gelding by <span class="gold">Grey Top</span></li>
             <li>Out of Rasmine Laudrup-Dufour · Denmark</li>
-            <li>Elite pedigree · Proven performance</li>
+            <li>Exceptional pedigree · Proven performance</li>
           </ul>
         </div>
       </article>
 
-      <article class="card rounded-2xl overflow-hidden">
-        <img src="img/references/extasy-courtil/1.jpg" alt="Extasy Courtil" class="media w-full" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/>
+      <article class="card rounded-2xl overflow-hidden reveal">
+        <div class="media-wrap"><img src="img/references/extasy-courtil/1.jpg" alt="Extasy Courtil" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
-          <h3 class="serif text-2xl font-semibold">Extasy Courtil</h3>
-          <ul class="mt-2 text-white/80 space-y-1">
+          <h3 class="serif text-xl font-semibold">Extasy Courtil</h3>
+          <ul class="mt-2 text-sm text-white/70 space-y-1">
             <li>Gelding by <span class="gold">Tzigano Massereuse</span></li>
             <li>European Championship for Children · Riesenbeck (DE)</li>
             <li>Top reference · Turkey 🇹🇷</li>
@@ -148,22 +185,22 @@
         </div>
       </article>
 
-      <article class="card rounded-2xl overflow-hidden">
-        <img src="img/references/moody/1.jpg" alt="Moody" class="media w-full" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/>
+      <article class="card rounded-2xl overflow-hidden reveal">
+        <div class="media-wrap"><img src="img/references/moody/1.jpg" alt="Moody" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
-          <h3 class="serif text-2xl font-semibold">Moody</h3>
-          <ul class="mt-2 text-white/80 space-y-1">
+          <h3 class="serif text-xl font-semibold">Moody</h3>
+          <ul class="mt-2 text-sm text-white/70 space-y-1">
             <li>Gelding by <span class="gold">Uganositte</span></li>
             <li>Competing 1.50m / 1.55m classes</li>
           </ul>
         </div>
       </article>
 
-      <article class="card rounded-2xl overflow-hidden">
-        <img src="img/references/knass-b/1.jpg" alt="Knass B" class="media w-full" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/>
+      <article class="card rounded-2xl overflow-hidden reveal">
+        <div class="media-wrap"><img src="img/references/knass-b/1.jpg" alt="Knass B" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
-          <h3 class="serif text-2xl font-semibold">Knass B</h3>
-          <ul class="mt-2 text-white/80 space-y-1">
+          <h3 class="serif text-xl font-semibold">Knass B</h3>
+          <ul class="mt-2 text-sm text-white/70 space-y-1">
             <li>Gelding by <span class="gold">Toulon</span></li>
             <li>🇺🇸 Competing 1.50m with Elisa Broz &amp; Cassio Rivetti</li>
             <li>Scope, quality &amp; consistency</li>
@@ -175,83 +212,99 @@
   </section>
 
   <!-- ── ABOUT ── -->
-  <section id="about" class="mx-auto max-w-7xl px-4 py-16">
+  <section id="about" class="mx-auto max-w-6xl px-4 py-14 md:py-16 border-t border-white/[.06]">
     <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h2 class="serif text-3xl md:text-4xl font-bold">Italian roots, global reach</h2>
-        <p class="mt-4 text-white/80">L.B. Horses is a boutique for elite showjumpers. From prospects to Grand Prix performers, we curate bloodlines, temperament, and athleticism. Our network and reputation allow us to place horses with top riders and ambitious amateurs across the world.</p>
-        <ul class="mt-6 grid sm:grid-cols-2 gap-3 text-white/80">
-          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-gold"></span> Bespoke sourcing &amp; tryouts</li>
-          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-gold"></span> International shipping &amp; paperwork</li>
-          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-gold"></span> Transparent vetting</li>
-          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-gold"></span> After-sale support</li>
+      <div class="reveal">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Italian roots, global reach</h2>
+        <p class="mt-4 text-[15px] text-white/70 leading-relaxed">L.B. Horses is a specialist dealer of quality showjumpers. From young prospects to Grand Prix performers, we select for bloodlines, temperament and athleticism — and place horses with top riders and ambitious amateurs across the world.</p>
+        <ul class="mt-6 grid sm:grid-cols-2 gap-3 text-sm text-white/75">
+          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Bespoke sourcing &amp; tryouts</li>
+          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> International shipping &amp; paperwork</li>
+          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Transparent vetting</li>
+          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> After-sale support</li>
         </ul>
       </div>
-      <div>
-        <img src="img/about.png" alt="LB Horses facility" class="media w-full rounded-2xl object-cover shadow-soft" onerror="this.style.display='none'" />
+      <div class="reveal">
+        <div class="media-wrap rounded-2xl shadow-soft">
+          <img src="img/about.png" alt="L.B. Horses facility" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── OWNER REFERENCES ── -->
-  <section id="owner" class="mx-auto max-w-7xl px-4 py-16">
-    <div class="card rounded-2xl p-8">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+  <section id="owner" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <div class="card rounded-2xl p-7 md:p-9 reveal">
+      <div class="grid md:grid-cols-2 gap-9 items-center">
         <div class="order-2 md:order-1">
-          <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" class="media w-full rounded-2xl object-cover shadow-soft" onerror="this.style.display='none'" />
+          <div class="media-wrap rounded-2xl shadow-soft">
+            <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+          </div>
         </div>
         <div class="order-1 md:order-2">
-          <h2 class="serif text-3xl md:text-4xl font-bold">Owner References — Lorenzo Barbadoro</h2>
-          <p class="mt-4 text-white/80">
-            Founder of <span class="gold font-semibold">L.B. Horses</span>, Lorenzo Barbadoro has a proven record in top sport, with results and experience that back our horse selection and training philosophy.
+          <p class="eyebrow">The founder</p>
+          <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Lorenzo Barbadoro</h2>
+          <p class="mt-4 text-[15px] text-white/70 leading-relaxed">
+            Founder of <span class="gold font-medium">L.B. Horses</span>, with a proven record in top sport. His results and experience inform the way we select, produce and present every horse.
           </p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <span class="text-xs tracking-wider px-3 py-1 rounded-full bg-white/10">2× European Championships</span>
-            <span class="text-xs tracking-wider px-3 py-1 rounded-full bg-white/10">9× Nations Cup</span>
-            <span class="text-xs tracking-wider px-3 py-1 rounded-full bg-white/10">2× Italian Championship Gold</span>
-            <span class="text-xs tracking-wider px-3 py-1 rounded-full bg-white/10">1× Italian Championship Silver</span>
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
+              <div class="serif text-2xl gold">2×</div>
+              <div class="text-xs text-white/60 mt-0.5">European Championships</div>
+            </div>
+            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
+              <div class="serif text-2xl gold">9×</div>
+              <div class="text-xs text-white/60 mt-0.5">Nations Cup</div>
+            </div>
+            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
+              <div class="serif text-2xl gold">2×</div>
+              <div class="text-xs text-white/60 mt-0.5">Italian Championship — Gold</div>
+            </div>
+            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
+              <div class="serif text-2xl gold">1×</div>
+              <div class="text-xs text-white/60 mt-0.5">Italian Championship — Silver</div>
+            </div>
           </div>
-          <ul class="mt-6 space-y-3 text-white/85">
-            <li>• <span class="gold font-medium">European Championships</span>: Wiener Neustadt 2015; Oliva Nova 2022</li>
-            <li>• <span class="gold font-medium">Nations Cup</span>: 9 participations</li>
-            <li>• <span class="gold font-medium">Italian Championships — Gold</span>: 2014 (San Giovanni in Marignano); 2022 (Arezzo)</li>
-            <li>• <span class="gold font-medium">Italian Championships — Silver</span>: 2015</li>
+          <ul class="mt-6 space-y-2 text-sm text-white/70">
+            <li>• <span class="gold">European Championships</span> — Wiener Neustadt 2015; Oliva Nova 2022</li>
+            <li>• <span class="gold">Nations Cup</span> — 9 participations</li>
+            <li>• <span class="gold">Italian Championships (Gold)</span> — 2014, 2022</li>
+            <li>• <span class="gold">Italian Championships (Silver)</span> — 2015</li>
           </ul>
-          <p class="mt-6 text-white/70 text-sm">
-            These highlights reflect Lorenzo's long-standing involvement at the highest levels, informing the way we source, produce and present horses for ambitious riders worldwide.
-          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── CONTACT ── -->
-  <section id="contact" class="mx-auto max-w-7xl px-4 py-16">
-    <div class="card rounded-2xl p-8">
-      <div class="grid md:grid-cols-2 gap-10">
+  <section id="contact" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
+    <div class="card rounded-2xl p-7 md:p-9 reveal">
+      <div class="grid md:grid-cols-2 gap-9">
         <div>
-          <h2 class="serif text-3xl md:text-4xl font-bold">Get in touch</h2>
-          <p class="mt-3 text-white/80">Tell us what you're looking for — height, age, record, and budget — and we'll propose suitable horses. We sell worldwide.</p>
-          <div class="mt-6 space-y-2 text-white/80">
-            <div><span class="text-white/60">Company:</span> <span class="gold font-medium">L.B. Horses</span></div>
-            <div><span class="text-white/60">Phone/WhatsApp:</span> <a class="gold hover:underline" href="https://wa.me/393664481244">+39 366 448 1244</a></div>
-            <div><span class="text-white/60">Email:</span> <a class="gold hover:underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a></div>
-            <div><span class="text-white/60">VAT (P.IVA):</span> 03984250369</div>
-            <div><span class="text-white/60">Location:</span> San Cesario sul Panaro (Modena), Italy</div>
+          <p class="eyebrow">Enquiries</p>
+          <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Get in touch</h2>
+          <p class="mt-3 text-[15px] text-white/70 leading-relaxed">Tell us what you're looking for — height, age, record and budget — and we'll propose suitable horses. We sell worldwide.</p>
+          <div class="mt-6 space-y-2.5 text-sm text-white/75">
+            <div><span class="text-white/45">Company</span><br><span class="gold font-medium">L.B. Horses S.R.L.S.</span></div>
+            <div><span class="text-white/45">Phone / WhatsApp</span><br><a class="gold link-underline" href="https://wa.me/393664481244">+39 366 448 1244</a></div>
+            <div><span class="text-white/45">Email</span><br><a class="gold link-underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a></div>
+            <div><span class="text-white/45">VAT (P.IVA)</span><br>03984250369</div>
+            <div><span class="text-white/45">Location</span><br>San Cesario sul Panaro (Modena), Italy</div>
           </div>
         </div>
-        <form action="mailto:barbadoro.lorenzo01@gmail.com" method="post" enctype="text/plain" class="space-y-4">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <input required name="name" placeholder="Your name" class="w-full bg-black/40 border border-white/15 px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
-            <input required type="email" name="email" placeholder="Email" class="w-full bg-black/40 border border-white/15 px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
+        <form action="mailto:barbadoro.lorenzo01@gmail.com" method="post" enctype="text/plain" class="space-y-3.5">
+          <div class="grid sm:grid-cols-2 gap-3.5">
+            <input required name="name" placeholder="Your name" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
+            <input required type="email" name="email" placeholder="Email" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
           </div>
-          <input name="phone" placeholder="Phone / WhatsApp" class="w-full bg-black/40 border border-white/15 px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
-          <textarea required name="message" rows="5" placeholder="Tell us about the horse you need (age, height, level, budget)." class="w-full bg-black/40 border border-white/15 px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold"></textarea>
-          <div class="flex items-center gap-3">
-            <button type="submit" class="bg-gold text-black font-semibold px-6 py-3 rounded-full hover:opacity-90">Send enquiry</button>
-            <a class="inline-flex items-center gap-2 border border-white/20 px-4 py-3 rounded-full hover:border-white/40" href="https://wa.me/393664481244">Chat on WhatsApp</a>
+          <input name="phone" placeholder="Phone / WhatsApp" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
+          <textarea required name="message" rows="5" placeholder="Tell us about the horse you need (age, height, level, budget)." class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold"></textarea>
+          <div class="flex flex-wrap items-center gap-3">
+            <button type="submit" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 transition">Send enquiry</button>
+            <a class="inline-flex items-center gap-2 border border-white/20 text-sm px-5 py-3 rounded-full hover:border-white/45 transition" href="https://wa.me/393664481244">Chat on WhatsApp</a>
           </div>
-          <p class="text-xs text-white/50">By submitting, you agree to be contacted by L.B. Horses regarding your enquiry.</p>
+          <p class="text-xs text-white/45">By submitting, you agree to be contacted by L.B. Horses regarding your enquiry.</p>
         </form>
       </div>
     </div>
@@ -259,24 +312,24 @@
 
   <!-- ── FOOTER ── -->
   <footer class="border-t border-white/10">
-    <div class="mx-auto max-w-7xl px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-white/70">
+    <div class="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-white/60">
       <div>
-        <div class="serif text-xl font-semibold gold">L.B. Horses</div>
+        <div class="serif text-lg font-semibold gold">L.B. Horses</div>
         <p class="mt-2">Showjumpers for sale worldwide.</p>
       </div>
       <div>
-        <div class="text-white/60">Address</div>
+        <div class="text-white/45">Address</div>
         <p>San Cesario sul Panaro (MO), Italy</p>
-        <div class="text-white/60 mt-3">VAT (P.IVA)</div>
+        <div class="text-white/45 mt-3">VAT (P.IVA)</div>
         <p>03984250369</p>
       </div>
       <div>
-        <div class="text-white/60">Contact</div>
-        <p>
-          <a class="gold hover:underline" href="tel:+393664481244">+39 366 448 1244</a> ·
-          <a class="gold hover:underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a>
+        <div class="text-white/45">Contact</div>
+        <p class="mt-1">
+          <a class="gold link-underline" href="tel:+393664481244">+39 366 448 1244</a><br>
+          <a class="gold link-underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a>
         </p>
-        <p class="mt-3">© <span id="year"></span> L.B. Horses. All rights reserved.</p>
+        <p class="mt-3 text-white/40">© <span id="year"></span> L.B. Horses. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -285,60 +338,105 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ── LOAD HORSES FROM horses.json ──────────────────────────────────────────
+    // ── Header shrink on scroll ──
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ── Scroll reveal (IntersectionObserver, with safe fallback) ──
+    const supportsIO = 'IntersectionObserver' in window;
+    const revealAll = (scope) => (scope || document).querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+    let revealObserver = null;
+
+    if (supportsIO) {
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }
+
+    function observeReveals(scope) {
+      if (!supportsIO) { revealAll(scope); return; }
+      (scope || document).querySelectorAll('.reveal:not(.in)').forEach((el, i) => {
+        el.style.transitionDelay = Math.min(i * 60, 240) + 'ms';
+        revealObserver.observe(el);
+      });
+    }
+    observeReveals();
+
+    // ── Load horses from horses.json ──
     async function loadHorses() {
       let horses = [];
       try {
         const res = await fetch('horses.json?v=' + Date.now());
         if (!res.ok) throw new Error();
         horses = await res.json();
-      } catch(e) {
+      } catch (e) {
         document.getElementById('horseGrid').innerHTML =
-          '<div class="col-span-3 text-center py-12 text-white/40 italic">Could not load horses data.</div>';
+          '<div class="col-span-full text-center py-12 text-white/40 italic">Could not load horses data.</div>';
         return;
       }
 
-      // Populate age filter
-      const ages = [...new Set(horses.map(h => h.age).filter(Boolean))].sort((a,b) => a-b);
+      // Dynamic hero stats
+      const forSaleCount = horses.filter(h => h.status !== 'sold').length;
+      const soldCount = horses.filter(h => h.status === 'sold').length;
+      const heroStats = document.getElementById('heroStats');
+      if (heroStats) {
+        heroStats.innerHTML = `
+          <div><div class="serif text-2xl gold">${forSaleCount}</div><div class="eyebrow mt-1">Available now</div></div>
+          <div><div class="serif text-2xl gold">${soldCount}+</div><div class="eyebrow mt-1">Placed &amp; sold</div></div>
+          <div><div class="serif text-2xl gold">30+</div><div class="eyebrow mt-1">Countries shipped</div></div>`;
+      }
+
+      // Dynamic catalogue subtitle
+      const sub = document.getElementById('horsesSubtitle');
+      if (sub) sub.textContent = `${forSaleCount} horses currently available · Vetting and trial by appointment · Worldwide shipping.`;
+
+      // Populate age filter (only real ages, ignore birth-year values)
+      const ages = [...new Set(horses.map(h => h.age).filter(a => a && a < 40))].sort((a, b) => a - b);
       const ageSelect = document.getElementById('ageFilter');
       ages.forEach(a => {
         const o = document.createElement('option');
-        o.value = a; o.textContent = a;
+        o.value = a; o.textContent = a + ' yrs';
         ageSelect.appendChild(o);
       });
 
       renderGrid(horses);
 
-      // Filtering
       const search = document.getElementById('search');
       const statusFilter = document.getElementById('statusFilter');
+      const noResults = document.getElementById('noResults');
 
       function applyFilters() {
         const q = (search.value || '').toLowerCase().trim();
         const status = statusFilter.value;
         const age = ageSelect.value;
+        let visible = 0;
         document.querySelectorAll('#horseGrid article').forEach(card => {
           const name = (card.dataset.name || '').toLowerCase();
           const blood = (card.dataset.bloodline || '').toLowerCase();
           const matchText = !q || name.includes(q) || blood.includes(q);
           const matchStatus = status === 'all' || card.dataset.status === status;
           const matchAge = age === 'all' || card.dataset.age === age;
-          card.style.display = matchText && matchStatus && matchAge ? '' : 'none';
+          const show = matchText && matchStatus && matchAge;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
         });
+        noResults.classList.toggle('hidden', visible !== 0);
       }
       [search, statusFilter, ageSelect].forEach(el => el.addEventListener('input', applyFilters));
     }
 
     function renderGrid(horses) {
       const grid = document.getElementById('horseGrid');
-
       if (!horses.length) {
-        grid.innerHTML = '<div class="col-span-3 text-center py-12 text-white/40 serif italic text-xl">No horses listed at the moment.</div>';
+        grid.innerHTML = '<div class="col-span-full text-center py-12 text-white/40 serif italic">No horses listed at the moment.</div>';
         return;
       }
 
-      // Sort: for-sale first, sold last
-      const sorted = [...horses].sort((a,b) => {
+      const sorted = [...horses].sort((a, b) => {
         if (a.status === 'sold' && b.status !== 'sold') return 1;
         if (a.status !== 'sold' && b.status === 'sold') return -1;
         return 0;
@@ -348,21 +446,22 @@
         const isSold = h.status === 'sold';
         const imgSrc = h.img_folder ? h.img_folder + '/1.jpg' : '';
         const imgHtml = imgSrc
-          ? `<img src="${imgSrc}" alt="${h.name}" class="media w-full"
-               onerror="this.outerHTML='<div class=\\'img-placeholder\\'>🐴</div>'">`
+          ? `<div class="media-wrap"><img src="${imgSrc}" alt="${h.name}" class="media"
+               onerror="this.closest('.media-wrap').outerHTML='<div class=\\'img-placeholder\\'>🐴</div>'"></div>`
           : `<div class="img-placeholder">🐴</div>`;
 
         const levelHtml = h.level
-          ? `<span class="px-2 py-1 rounded-full bg-white/10">Level: ${h.level}</span>` : '';
+          ? `<span class="px-2 py-1 rounded-full bg-white/10 text-xs">Level ${h.level}</span>` : '';
         const notesHtml = h.notes
-          ? `<span class="ml-2 text-white/70">${h.notes}</span>` : '';
+          ? `<span class="text-xs text-white/60">${h.notes}</span>` : '';
 
-        const enquireText = isSold ? 'Request Similar' : 'Enquire';
-        const statusLabel = isSold ? 'Sold' : 'For Sale';
+        const enquireText = isSold ? 'Request similar' : 'Enquire';
+        const statusLabel = isSold ? 'Sold' : 'For sale';
+        const statusClass = isSold ? 'bg-white/10 text-white/60' : 'bg-gold/15 text-gold';
         const ribbon = isSold ? '<div class="sold-ribbon">SOLD</div>' : '';
 
         return `
-          <article class="card rounded-2xl overflow-hidden relative"
+          <article class="card rounded-2xl overflow-hidden relative reveal"
             data-status="${h.status}"
             data-age="${h.age || ''}"
             data-name="${h.name}"
@@ -370,20 +469,22 @@
             ${ribbon}
             ${imgHtml}
             <div class="p-5">
-              <h3 class="serif text-2xl font-semibold">${h.name}</h3>
-              <p class="text-white/70 mt-1">
-                ${h.gender ? h.gender + ' · ' : ''}
-                ${h.age ? h.age + ' years' : ''}
-                ${h.bloodline ? ' · by <span class="gold">' + h.bloodline + '</span>' : ''}
+              <h3 class="serif text-xl font-semibold">${h.name}</h3>
+              <p class="text-sm text-white/60 mt-1">
+                ${h.gender ? h.gender : ''}
+                ${h.bloodline ? '· by <span class="gold">' + h.bloodline + '</span>' : ''}
               </p>
-              ${(levelHtml || notesHtml) ? `<div class="mt-2 text-sm">${levelHtml}${notesHtml}</div>` : ''}
-              <div class="mt-4 flex items-center justify-between">
-                <span class="text-xs tracking-wider px-2.5 py-1 rounded-full bg-white/10">${statusLabel}</span>
-                <a href="#contact" class="text-sm gold hover:underline">${enquireText}</a>
+              <div class="mt-3 flex flex-wrap items-center gap-2">${levelHtml}${notesHtml}</div>
+              <div class="mt-4 flex items-center justify-between border-t border-white/[.06] pt-3">
+                <span class="text-[11px] tracking-wider px-2.5 py-1 rounded-full ${statusClass}">${statusLabel}</span>
+                <a href="#contact" class="text-sm gold link-underline">${enquireText} →</a>
               </div>
             </div>
           </article>`;
       }).join('');
+
+      // Animate the freshly injected cards
+      observeReveals(grid);
     }
 
     loadHorses();
