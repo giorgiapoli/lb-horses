@@ -141,5 +141,16 @@
     "status": "sold",
     "notes": "Amateur horse",
     "img_folder": "img/ladyIsabella"
+  },
+  {
+    "id": 1786628462271,
+    "name": "Si Belle Green horse Z",
+    "gender": "Mare",
+    "year": 2022,
+    "bloodline": "",
+    "level": "1.30m",
+    "status": "sold",
+    "notes": "Green mare - Top prospect",
+    "img_folder": "img/Sibelle"
   }
 ]
