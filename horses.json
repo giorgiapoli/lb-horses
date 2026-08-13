@@ -185,5 +185,16 @@
     "status": "sold",
     "notes": "Brave horse for every type of rider Easy to ride • Suitable also for amateurs Complete and Good X-Rays",
     "img_folder": "ing/coolkid"
+  },
+  {
+    "id": 1786643354718,
+    "name": "Vedett V",
+    "gender": "Gelding",
+    "year": 2021,
+    "bloodline": "Matisse de Mariposa x Va-Vite",
+    "level": "1.15 m",
+    "status": "sold",
+    "notes": "Amateur horse",
+    "img_folder": "img/vedett"
   }
 ]
