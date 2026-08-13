@@ -119,5 +119,16 @@
     "notes": "Bloody type, scope and careful",
     "status": "for-sale",
     "img_folder": "v8-2gz"
+  },
+  {
+    "id": 1786617513138,
+    "name": "Cartinus",
+    "gender": "Gelding",
+    "year": 2024,
+    "bloodline": "",
+    "level": "",
+    "status": "for-sale",
+    "notes": "",
+    "img_folder": "img/cartinus"
   }
 ]
