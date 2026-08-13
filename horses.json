@@ -218,5 +218,16 @@
     "status": "sold",
     "notes": "Amateur horse -Good prospect",
     "img_folder": "img/vogel"
+  },
+  {
+    "id": 1786646704642,
+    "name": "Killfarrasy Staycation",
+    "gender": "Mare",
+    "year": 2018,
+    "bloodline": "Obrigado van Overis x Balou du Rouet",
+    "level": "1.35m",
+    "status": "sold",
+    "notes": "Amateur horse",
+    "img_folder": "img/killfarrasy"
   }
 ]
