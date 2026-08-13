@@ -174,5 +174,16 @@
     "status": "for-sale",
     "notes": "GP Prospect horse",
     "img_folder": "omg/capitan"
+  },
+  {
+    "id": 1786642457345,
+    "name": "Cool kid Z",
+    "gender": "Mare",
+    "year": null,
+    "bloodline": "",
+    "level": "",
+    "status": "for-sale",
+    "notes": "",
+    "img_folder": "ing/coolkid"
   }
 ]
