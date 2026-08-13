@@ -163,5 +163,16 @@
     "status": "for-sale",
     "notes": "Competitive horse for any type of riders",
     "img_folder": "img/castlelawn"
+  },
+  {
+    "id": 1786642094432,
+    "name": "El Capitan Z",
+    "gender": "Gelding",
+    "year": 2020,
+    "bloodline": "El Barone x Voltaire",
+    "level": "1.25 -1.30 m",
+    "status": "for-sale",
+    "notes": "GP Prospect horse",
+    "img_folder": "omg/capitan"
   }
 ]
