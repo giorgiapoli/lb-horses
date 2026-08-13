@@ -130,5 +130,16 @@
     "status": "for-sale",
     "notes": "Stallion top blodlines",
     "img_folder": "img/cartinus"
+  },
+  {
+    "id": 1786624562434,
+    "name": "Lady Isabella",
+    "gender": "Mare",
+    "year": null,
+    "bloodline": "",
+    "level": "1.15 m",
+    "status": "sold",
+    "notes": "Amateur horse",
+    "img_folder": "img/ladyIsabella"
   }
 ]
