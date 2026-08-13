@@ -196,5 +196,16 @@
     "status": "sold",
     "notes": "Amateur horse",
     "img_folder": "img/vedett"
+  },
+  {
+    "id": 1786644088449,
+    "name": "Samiro van Het Vijerhof",
+    "gender": "Gelding",
+    "year": 2018,
+    "bloodline": "Oliver Obolensky ( by Cornet Obolensky) x Eldorado V.H. Vijverhof",
+    "level": "1.15m",
+    "status": "sold",
+    "notes": "Amateur horse",
+    "img_folder": "img/samiro"
   }
 ]
