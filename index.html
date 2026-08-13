@@ -33,7 +33,9 @@
     .media-wrap img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
     .media-wrap:hover img { transform: scale(1.06); }
     .media { aspect-ratio:16/10; object-fit:cover; width:100%; display:block; }
+    .media-tall { aspect-ratio:4/5; object-fit:cover; object-position:center 35%; width:100%; display:block; }
     .img-placeholder { aspect-ratio:16/10; background:linear-gradient(135deg,#171717,#242422); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:#3a3a38; }
+    .img-placeholder-tall { aspect-ratio:4/5; background:linear-gradient(135deg,#171717,#242422); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:#3a3a38; }
 
     .sold-ribbon { position:absolute; top:14px; left:-42px; transform:rotate(-45deg); background:#9a1f36; color:#fff; padding:5px 48px; font-weight:600; letter-spacing:.08em; font-size:.66rem; box-shadow:0 8px 24px rgba(0,0,0,.55); z-index:2; }
 
@@ -446,9 +448,9 @@
         const isSold = h.status === 'sold';
         const imgSrc = h.img_folder ? h.img_folder + '/1.jpg' : '';
         const imgHtml = imgSrc
-          ? `<div class="media-wrap"><img src="${imgSrc}" alt="${h.name}" class="media"
-               onerror="this.closest('.media-wrap').outerHTML='<div class=\\'img-placeholder\\'>🐴</div>'"></div>`
-          : `<div class="img-placeholder">🐴</div>`;
+          ? `<div class="media-wrap"><img src="${imgSrc}" alt="${h.name}" class="media-tall"
+               onerror="this.closest('.media-wrap').outerHTML='<div class=\\'img-placeholder-tall\\'>🐴</div>'"></div>`
+          : `<div class="img-placeholder-tall">🐴</div>`;
 
         const levelHtml = h.level
           ? `<span class="px-2 py-1 rounded-full bg-white/10 text-xs">Level ${h.level}</span>` : '';
