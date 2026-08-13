@@ -207,5 +207,16 @@
     "status": "sold",
     "notes": "Amateur horse",
     "img_folder": "img/samiro"
+  },
+  {
+    "id": 1786644183179,
+    "name": "Vogel",
+    "gender": "Gelding",
+    "year": 2020,
+    "bloodline": "Cello vd Bisschop (Cicero van Paemel) x Lucky Boy x Quick Star",
+    "level": "1.20m",
+    "status": "sold",
+    "notes": "Amateur horse -Good prospect",
+    "img_folder": "img/vogel"
   }
 ]
