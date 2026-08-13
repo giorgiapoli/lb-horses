@@ -124,8 +124,8 @@
           <option value="for-sale">For sale</option>
           <option value="sold">Sold</option>
         </select>
-        <select id="ageFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
-          <option value="all">All ages</option>
+        <select id="yearFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
+          <option value="all">All years</option>
         </select>
       </div>
     </div>
@@ -394,13 +394,13 @@
       const sub = document.getElementById('horsesSubtitle');
       if (sub) sub.textContent = `${forSaleCount} horses currently available · Vetting and trial by appointment · Worldwide shipping.`;
 
-      // Populate age filter (only real ages, ignore birth-year values)
-      const ages = [...new Set(horses.map(h => h.age).filter(a => a && a < 40))].sort((a, b) => a - b);
-      const ageSelect = document.getElementById('ageFilter');
-      ages.forEach(a => {
+      // Populate year filter (birth years, newest first)
+      const years = [...new Set(horses.map(h => h.year).filter(Boolean))].sort((a, b) => b - a);
+      const yearSelect = document.getElementById('yearFilter');
+      years.forEach(y => {
         const o = document.createElement('option');
-        o.value = a; o.textContent = a + ' yrs';
-        ageSelect.appendChild(o);
+        o.value = y; o.textContent = y;
+        yearSelect.appendChild(o);
       });
 
       renderGrid(horses);
@@ -412,21 +412,21 @@
       function applyFilters() {
         const q = (search.value || '').toLowerCase().trim();
         const status = statusFilter.value;
-        const age = ageSelect.value;
+        const year = yearSelect.value;
         let visible = 0;
         document.querySelectorAll('#horseGrid article').forEach(card => {
           const name = (card.dataset.name || '').toLowerCase();
           const blood = (card.dataset.bloodline || '').toLowerCase();
           const matchText = !q || name.includes(q) || blood.includes(q);
           const matchStatus = status === 'all' || card.dataset.status === status;
-          const matchAge = age === 'all' || card.dataset.age === age;
-          const show = matchText && matchStatus && matchAge;
+          const matchYear = year === 'all' || card.dataset.year === year;
+          const show = matchText && matchStatus && matchYear;
           card.style.display = show ? '' : 'none';
           if (show) visible++;
         });
         noResults.classList.toggle('hidden', visible !== 0);
       }
-      [search, statusFilter, ageSelect].forEach(el => el.addEventListener('input', applyFilters));
+      [search, statusFilter, yearSelect].forEach(el => el.addEventListener('input', applyFilters));
     }
 
     function renderGrid(horses) {
@@ -463,7 +463,7 @@
         return `
           <article class="card rounded-2xl overflow-hidden relative reveal"
             data-status="${h.status}"
-            data-age="${h.age || ''}"
+            data-year="${h.year || ''}"
             data-name="${h.name}"
             data-bloodline="${h.bloodline || ''}">
             ${ribbon}
@@ -471,7 +471,7 @@
             <div class="p-5">
               <h3 class="serif text-xl font-semibold">${h.name}</h3>
               <p class="text-sm text-white/60 mt-1">
-                ${h.gender ? h.gender : ''}
+                ${[h.gender, h.year].filter(Boolean).join(' · ')}
                 ${h.bloodline ? '· by <span class="gold">' + h.bloodline + '</span>' : ''}
               </p>
               <div class="mt-3 flex flex-wrap items-center gap-2">${levelHtml}${notesHtml}</div>

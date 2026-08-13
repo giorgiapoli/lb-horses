@@ -254,8 +254,8 @@
             </select>
           </div>
           <div class="fg">
-            <label>Età (anni)</label>
-            <input type="number" id="f-age" placeholder="7" min="0" max="30">
+            <label>Anno di nascita</label>
+            <input type="number" id="f-year" placeholder="2019" min="1990" max="2030">
           </div>
         </div>
         <div class="fg">
@@ -436,7 +436,7 @@ function renderList() {
     var thumb = imgSrc
       ? '<div class="horse-thumb"><img src="' + imgSrc + '" onerror="this.parentNode.innerHTML=\'🐴\'" alt=""></div>'
       : '<div class="horse-thumb">🐴</div>';
-    var meta = [h.gender, h.age ? h.age + ' y' : '', h.bloodline].filter(Boolean).join(' · ');
+    var meta = [h.gender, h.year ? 'n. ' + h.year : '', h.bloodline].filter(Boolean).join(' · ');
     html += '<div class="horse-item">';
     html += thumb;
     html += '<div class="horse-info">';
@@ -471,7 +471,7 @@ function editHorse(id) {
   document.getElementById('f-id').value = id;
   document.getElementById('f-name').value = h.name || '';
   document.getElementById('f-gender').value = h.gender || '';
-  document.getElementById('f-age').value = h.age || '';
+  document.getElementById('f-year').value = h.year || '';
   document.getElementById('f-bloodline').value = h.bloodline || '';
   document.getElementById('f-level').value = h.level || '';
   document.getElementById('f-status').value = h.status || 'for-sale';
@@ -492,7 +492,7 @@ function cancelEdit() {
 function resetForm() {
   editingId = null;
   document.getElementById('form-heading').textContent = 'Nuovo cavallo';
-  var fields = ['f-id','f-name','f-age','f-bloodline','f-level','f-notes','f-imgfolder'];
+  var fields = ['f-id','f-name','f-year','f-bloodline','f-level','f-notes','f-imgfolder'];
   for (var i = 0; i < fields.length; i++) document.getElementById(fields[i]).value = '';
   document.getElementById('f-gender').value = '';
   document.getElementById('f-status').value = 'for-sale';
@@ -633,12 +633,12 @@ async function deletePhoto(i) {
 async function saveHorse() {
   var name = (document.getElementById('f-name').value || '').trim();
   if (!name) { toast('Inserisci il nome del cavallo', 'err'); return; }
-  var ageVal = parseInt(document.getElementById('f-age').value);
+  var yearVal = parseInt(document.getElementById('f-year').value);
   var h = {
     id: editingId || Date.now(),
     name: name,
     gender: document.getElementById('f-gender').value,
-    age: isNaN(ageVal) ? null : ageVal,
+    year: isNaN(yearVal) ? null : yearVal,
     bloodline: (document.getElementById('f-bloodline').value || '').trim(),
     level: (document.getElementById('f-level').value || '').trim(),
     status: document.getElementById('f-status').value,
