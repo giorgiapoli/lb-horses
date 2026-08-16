@@ -229,5 +229,16 @@
     "status": "sold",
     "notes": "Amateur horse",
     "img_folder": "img/killfarrasy"
+  },
+  {
+    "id": 1786881634195,
+    "name": "Oracle",
+    "gender": "Mare",
+    "year": 2024,
+    "bloodline": "Emerald x Up to date x Andiamo Z",
+    "level": "",
+    "status": "for-sale",
+    "notes": "Top bloodlines- Her mother jumped up to 1.50m",
+    "img_folder": "img/oracle"
   }
 ]
