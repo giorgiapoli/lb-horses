@@ -9,6 +9,9 @@
   <meta property="og:title" content="L.B. Horses — Showjumpers for Sale Worldwide" />
   <meta property="og:description" content="Sourcing, producing and selling quality showjumpers. Modena, Italy. Worldwide shipping." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/hero/1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%23c9a24b%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2713%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23000%27 font-family=%27Georgia,serif%27%3ELB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -54,6 +57,24 @@
       html { scroll-behavior:auto; }
     }
 
+    /* focus visibility */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    section[id] { scroll-margin-top:72px; }
+
+    /* sold horses: quieter, so available ones lead */
+    .is-sold .media-wrap img { filter:grayscale(.55) brightness(.8); }
+    .is-sold:hover .media-wrap img { filter:none; }
+
+    /* hero accent line + subtle section rule */
+    .gold-rule { width:44px; height:2px; background:var(--gold); border-radius:2px; }
+
+    /* mobile menu */
+    #mobileMenu { display:none; }
+    #mobileMenu.open { display:block; }
+
+    /* floating WhatsApp (mobile) */
+    .fab-wa { position:fixed; right:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; background:var(--gold); color:#000; display:grid; place-items:center; box-shadow:0 10px 28px rgba(0,0,0,.55); }
+
     .link-underline { position:relative; }
     .link-underline::after { content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
     .link-underline:hover::after { width:100%; }
@@ -81,14 +102,26 @@
       <div class="flex items-center gap-2.5">
         <a href="https://wa.me/393664481244" class="hidden sm:inline-flex bg-gold text-black font-medium text-sm px-4 py-2 rounded-full hover:opacity-90 transition">WhatsApp</a>
         <a href="#contact" class="inline-flex border border-white/20 text-sm px-4 py-2 rounded-full hover:border-white/45 transition">Enquire</a>
+        <button id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden w-10 h-10 grid place-items-center rounded-full border border-white/20">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
     </div>
+    <nav id="mobileMenu" class="md:hidden border-t border-white/10 bg-black/90 backdrop-blur">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex flex-col text-[15px] text-white/80">
+        <a href="#horses" class="py-3 border-b border-white/[.06]">Horses</a>
+        <a href="#references" class="py-3 border-b border-white/[.06]">References</a>
+        <a href="#about" class="py-3 border-b border-white/[.06]">About</a>
+        <a href="#contact" class="py-3">Contact</a>
+      </div>
+    </nav>
   </header>
 
   <!-- ── HERO ── -->
   <section id="top" class="relative overflow-hidden gradient">
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
       <div class="reveal">
+        <div class="gold-rule mb-4"></div>
         <p class="eyebrow">Modena, Italy · Worldwide shipping</p>
         <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.12] mt-4">Showjumpers, <span class="gold">sourced and produced</span> for sport.</h1>
         <p class="mt-5 text-[15px] md:text-base text-white/70 max-w-lg leading-relaxed">We select young and proven horses, produce them through training and competition, and place them with riders worldwide — with transparent vetting and full shipping support.</p>
@@ -100,7 +133,7 @@
       </div>
       <div class="relative reveal">
         <div class="media-wrap rounded-2xl shadow-soft">
-          <img src="img/hero/1.jpg" alt="Showjumper in action" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+          <img src="img/hero/1.jpg" alt="Showjumper in action" class="media" fetchpriority="high" onerror="this.closest('.media-wrap').style.display='none'" />
         </div>
         <div class="absolute -bottom-4 -right-3 bg-black/80 border border-white/10 rounded-xl px-4 py-3 backdrop-blur">
           <div class="eyebrow">Headquarters</div>
@@ -153,7 +186,7 @@
     <div class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
       <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/maurice/1.jpg" alt="Maurice" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
+        <div class="media-wrap"><img src="img/references/maurice/1.jpg" alt="Maurice" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
           <h3 class="serif text-xl font-semibold">Maurice</h3>
           <ul class="mt-2 text-sm text-white/70 space-y-1">
@@ -164,7 +197,7 @@
       </article>
 
       <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/granit/1.jpg" alt="Granit" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
+        <div class="media-wrap"><img src="img/references/granit/1.jpg" alt="Granit" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
           <h3 class="serif text-xl font-semibold">Granit</h3>
           <ul class="mt-2 text-sm text-white/70 space-y-1">
@@ -176,7 +209,7 @@
       </article>
 
       <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/extasy-courtil/1.jpg" alt="Extasy Courtil" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
+        <div class="media-wrap"><img src="img/references/extasy-courtil/1.jpg" alt="Extasy Courtil" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
           <h3 class="serif text-xl font-semibold">Extasy Courtil</h3>
           <ul class="mt-2 text-sm text-white/70 space-y-1">
@@ -188,7 +221,7 @@
       </article>
 
       <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/moody/1.jpg" alt="Moody" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
+        <div class="media-wrap"><img src="img/references/moody/1.jpg" alt="Moody" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
           <h3 class="serif text-xl font-semibold">Moody</h3>
           <ul class="mt-2 text-sm text-white/70 space-y-1">
@@ -199,7 +232,7 @@
       </article>
 
       <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/knass-b/1.jpg" alt="Knass B" class="media" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
+        <div class="media-wrap"><img src="img/references/knass-b/1.jpg" alt="Knass B" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
         <div class="p-5">
           <h3 class="serif text-xl font-semibold">Knass B</h3>
           <ul class="mt-2 text-sm text-white/70 space-y-1">
@@ -229,7 +262,7 @@
       </div>
       <div class="reveal">
         <div class="media-wrap rounded-2xl shadow-soft">
-          <img src="img/about.png" alt="L.B. Horses facility" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+          <img src="img/about.png" alt="L.B. Horses facility" class="media" loading="lazy" decoding="async" onerror="this.closest('.media-wrap').style.display='none'" />
         </div>
       </div>
     </div>
@@ -241,7 +274,7 @@
       <div class="grid md:grid-cols-2 gap-9 items-center">
         <div class="order-2 md:order-1">
           <div class="media-wrap rounded-2xl shadow-soft">
-            <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" class="media" onerror="this.closest('.media-wrap').style.display='none'" />
+            <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" class="media" loading="lazy" decoding="async" onerror="this.closest('.media-wrap').style.display='none'" />
           </div>
         </div>
         <div class="order-1 md:order-2">
@@ -295,7 +328,7 @@
             <div><span class="text-white/45">Location</span><br>San Cesario sul Panaro (Modena), Italy</div>
           </div>
         </div>
-        <form action="mailto:barbadoro.lorenzo01@gmail.com" method="post" enctype="text/plain" class="space-y-3.5">
+        <form id="contactForm" class="space-y-3.5">
           <div class="grid sm:grid-cols-2 gap-3.5">
             <input required name="name" placeholder="Your name" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
             <input required type="email" name="email" placeholder="Email" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
@@ -318,6 +351,7 @@
       <div>
         <div class="serif text-lg font-semibold gold">L.B. Horses</div>
         <p class="mt-2">Showjumpers for sale worldwide.</p>
+        <p class="mt-3 flex gap-4 text-white/50"><a class="link-underline hover:text-white" href="#horses">Horses</a><a class="link-underline hover:text-white" href="#references">References</a><a class="link-underline hover:text-white" href="#about">About</a><a class="link-underline hover:text-white" href="#contact">Contact</a></p>
       </div>
       <div>
         <div class="text-white/45">Address</div>
@@ -336,9 +370,26 @@
     </div>
   </footer>
 
+  <a href="https://wa.me/393664481244" class="fab-wa sm:hidden" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.1A8.5 8.5 0 1 1 21 12Z"/></svg>
+  </a>
+
   <!-- ── SCRIPTS ── -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Mobile menu ──
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
     // ── Header shrink on scroll ──
     const header = document.getElementById('siteHeader');
@@ -448,14 +499,14 @@
         const isSold = h.status === 'sold';
         const imgSrc = h.img_folder ? h.img_folder + '/1.jpg' : '';
         const imgHtml = imgSrc
-          ? `<div class="media-wrap"><img src="${imgSrc}" alt="${h.name}" class="media-tall"
+          ? `<div class="media-wrap"><img src="${imgSrc}" loading="lazy" decoding="async" alt="${esc(h.name)}" class="media-tall"
                onerror="this.closest('.media-wrap').outerHTML='<div class=\\'img-placeholder-tall\\'>🐴</div>'"></div>`
           : `<div class="img-placeholder-tall">🐴</div>`;
 
         const levelHtml = h.level
-          ? `<span class="px-2 py-1 rounded-full bg-white/10 text-xs">Level ${h.level}</span>` : '';
+          ? `<span class="px-2 py-1 rounded-full bg-white/10 text-xs">Level ${esc(h.level)}</span>` : '';
         const notesHtml = h.notes
-          ? `<span class="text-xs text-white/60">${h.notes}</span>` : '';
+          ? `<span class="text-xs text-white/60">${esc(h.notes)}</span>` : '';
 
         const enquireText = isSold ? 'Request similar' : 'Enquire';
         const statusLabel = isSold ? 'Sold' : 'For sale';
@@ -463,23 +514,23 @@
         const ribbon = isSold ? '<div class="sold-ribbon">SOLD</div>' : '';
 
         return `
-          <article class="card rounded-2xl overflow-hidden relative reveal"
+          <article class="card rounded-2xl overflow-hidden relative reveal${isSold ? ' is-sold' : ''}"
             data-status="${h.status}"
             data-year="${h.year || ''}"
-            data-name="${h.name}"
-            data-bloodline="${h.bloodline || ''}">
+            data-name="${esc(h.name)}"
+            data-bloodline="${esc(h.bloodline)}">
             ${ribbon}
             ${imgHtml}
             <div class="p-5">
-              <h3 class="serif text-xl font-semibold">${h.name}</h3>
+              <h3 class="serif text-xl font-semibold">${esc(h.name)}</h3>
               <p class="text-sm text-white/60 mt-1">
                 ${[h.gender, h.year].filter(Boolean).join(' · ')}
-                ${h.bloodline ? '· by <span class="gold">' + h.bloodline + '</span>' : ''}
+                ${h.bloodline ? '· by <span class="gold">' + esc(h.bloodline) + '</span>' : ''}
               </p>
               <div class="mt-3 flex flex-wrap items-center gap-2">${levelHtml}${notesHtml}</div>
               <div class="mt-4 flex items-center justify-between border-t border-white/[.06] pt-3">
                 <span class="text-[11px] tracking-wider px-2.5 py-1 rounded-full ${statusClass}">${statusLabel}</span>
-                <a href="#contact" class="text-sm gold link-underline">${enquireText} →</a>
+                <a href="#contact" data-horse="${esc(h.name)}" data-sold="${isSold}" class="enquire-link text-sm gold link-underline">${enquireText} →</a>
               </div>
             </div>
           </article>`;
@@ -488,6 +539,25 @@
       // Animate the freshly injected cards
       observeReveals(grid);
     }
+
+    // ── Prefill the enquiry with the chosen horse ──
+    document.getElementById('horseGrid').addEventListener('click', (e) => {
+      const a = e.target.closest('.enquire-link');
+      if (!a) return;
+      const msg = document.querySelector('#contactForm textarea[name="message"]');
+      const sold = a.dataset.sold === 'true';
+      msg.value = sold
+        ? `Hello, I saw ${a.dataset.horse} was sold. I'm looking for a similar horse (age, height, level, budget): `
+        : `Hello, I'm interested in ${a.dataset.horse}. Could you send me more details, videos and vetting info?`;
+    });
+
+    // ── Enquiry form: build a clean, readable email ──
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const body = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nPhone: ${f.get('phone') || '-'}\n\n${f.get('message')}`;
+      window.location.href = 'mailto:barbadoro.lorenzo01@gmail.com?subject=' + encodeURIComponent('Website enquiry — ' + f.get('name')) + '&body=' + encodeURIComponent(body);
+    });
 
     loadHorses();
   </script>
