@@ -240,5 +240,15 @@
     "status": "for-sale",
     "notes": "Top bloodlines- Her mother jumped up to 1.50m",
     "img_folder": "img/oracle"
+  },
+  {
+    "id": 1792853100192,
+    "name": "Filly by Ermitage Kalone",
+    "gender": "Filly",
+    "bloodline": "Ermitage Kalone × Up To Date × Andiamo Z",
+    "level": "",
+    "status": "sold",
+    "notes": "Mother jumps up to 1.50m",
+    "img_folder": "img/filly-ermitage-kalone"
   }
 ]
