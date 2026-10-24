@@ -46,8 +46,11 @@
 
     /* catalogue cards */
     .horse { position:relative; overflow:hidden; border-radius:1rem; background:#151514; cursor:pointer; aspect-ratio:4/5; text-align:left; width:100%; display:block; }
-    .horse img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; transition:transform .9s cubic-bezier(.2,.7,.2,1); }
-    .horse:hover img { transform:scale(1.06); }
+    .horse img { position:absolute; inset:0; width:100%; height:100%; }
+    /* whole photo visible (never cropped); a blurred copy fills the rest of the card */
+    .horse .bg { object-fit:cover; filter:blur(24px) brightness(.5); transform:scale(1.2); }
+    .horse .fg { object-fit:contain; object-position:center 38%; transition:transform .9s cubic-bezier(.2,.7,.2,1); }
+    .horse:hover .fg { transform:scale(1.04); }
     .horse .veil { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.88) 100%); }
     .horse .cap { position:absolute; left:0; right:0; bottom:0; padding:1.25rem; }
     .horse .more { opacity:0; transform:translateY(6px); transition:all .35s ease; }
@@ -75,7 +78,7 @@
     @media (prefers-reduced-motion:reduce) {
       .reveal { opacity:1 !important; transform:none !important; transition:none; }
       .hero-slide, .hero-slide.on { animation:none; transition:none; }
-      .horse:hover img { transform:none; }
+      .horse:hover .fg { transform:none; }
       html { scroll-behavior:auto; }
     }
 
@@ -400,7 +403,7 @@
       const big = opts.feature ? 'feature' : '';
       return `
         <button type="button" class="horse ${big} reveal" data-id="${h.id}" aria-label="${esc(h.name)} — view details">
-          ${img ? `<img src="${img}" alt="${esc(h.name)}" loading="lazy" decoding="async" class="${sold ? 'placed' : ''}" onerror="this.parentElement.classList.add('placeholder');this.remove()">` : ''}
+          ${img ? `<img src="${img}" alt="" aria-hidden="true" loading="lazy" decoding="async" class="bg ${sold ? 'placed' : ''}" onerror="this.remove()"><img src="${img}" alt="${esc(h.name)}" loading="lazy" decoding="async" class="fg ${sold ? 'placed' : ''}" onerror="this.parentElement.classList.add('placeholder');this.remove()">` : ''}
           <span class="veil"></span>
           <span class="cap">
             <span class="flex flex-wrap gap-1.5 mb-2">
