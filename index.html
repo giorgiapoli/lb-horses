@@ -247,9 +247,9 @@
         <h2 class="serif text-3xl md:text-5xl font-medium mt-3 leading-tight">Tell us what<br>you're looking for.</h2>
         <p class="mt-5 text-[15px] leading-relaxed text-[#55524a] max-w-md">Height, age, record and budget — we'll propose suitable horses. We sell worldwide.</p>
         <dl class="mt-9 space-y-5 text-sm">
-          <div><dt class="text-[#7d7868]">Phone / WhatsApp</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline" href="https://wa.me/393664481244">+39 366 448 1244</a></dd></div>
-          <div><dt class="text-[#7d7868]">Email</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline break-all" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a></dd></div>
-          <div><dt class="text-[#7d7868]">Location</dt><dd class="mt-0.5">San Cesario sul Panaro (Modena), Italy</dd></div>
+          <div><dt class="text-[#7d7868]">Phone / WhatsApp</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline" data-href="https://wa.me/{whatsapp}" data-site="phone"></a></dd></div>
+          <div><dt class="text-[#7d7868]">Email</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline break-all" data-href="mailto:{email}" data-site="email"></a></dd></div>
+          <div><dt class="text-[#7d7868]">Location</dt><dd class="mt-0.5" data-site="location"></dd></div>
         </dl>
       </div>
       <form id="contactForm" class="space-y-3.5 reveal">
@@ -261,7 +261,7 @@
         <textarea required name="message" rows="6" placeholder="Tell us about the horse you need (age, height, level, budget)." aria-label="Message" class="field w-full text-sm px-4 py-3.5 rounded-lg"></textarea>
         <div class="flex flex-wrap items-center gap-3 pt-1">
           <button type="submit" class="bg-[#0b0b0a] text-white font-medium text-sm px-7 py-3.5 rounded-full hover:opacity-85 transition">Send enquiry</button>
-          <a class="inline-flex items-center border border-[#0b0b0a]/30 text-sm px-6 py-3.5 rounded-full hover:border-[#0b0b0a] transition" href="https://wa.me/393664481244">Chat on WhatsApp</a>
+          <a class="inline-flex items-center border border-[#0b0b0a]/30 text-sm px-6 py-3.5 rounded-full hover:border-[#0b0b0a] transition" data-href="https://wa.me/{whatsapp}" href="#contact">Chat on WhatsApp</a>
         </div>
         <p class="text-xs text-[#7d7868]">By submitting, you agree to be contacted by L.B. Horses regarding your enquiry.</p>
       </form>
@@ -280,20 +280,20 @@
       </div>
       <div>
         <div class="text-white/40">Company</div>
-        <p class="mt-1">L.B. Horses S.R.L.S.<br>San Cesario sul Panaro (MO), Italy<br>VAT (P.IVA) 03984250369</p>
+        <p class="mt-1"><span data-site="company"></span><br><span data-site="locationShort"></span><br>VAT (P.IVA) <span data-site="vat"></span></p>
       </div>
       <div>
         <div class="text-white/40">Contact</div>
         <p class="mt-1">
-          <a class="gold hover:underline" href="tel:+393664481244">+39 366 448 1244</a><br>
-          <a class="gold hover:underline break-all" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a>
+          <a class="gold hover:underline" data-href="tel:+{whatsapp}" data-site="phone"></a><br>
+          <a class="gold hover:underline break-all" data-href="mailto:{email}" data-site="email"></a>
         </p>
         <p class="mt-4 text-white/40">© <span id="year"></span> L.B. Horses. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <a href="https://wa.me/393664481244" class="fab-wa sm:hidden" aria-label="Chat on WhatsApp">
+  <a data-href="https://wa.me/{whatsapp}" href="#contact" class="fab-wa sm:hidden" aria-label="Chat on WhatsApp">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.1A8.5 8.5 0 1 1 21 12Z"/></svg>
   </a>
 
@@ -453,7 +453,7 @@
           </dl>
           <div class="mt-auto pt-8 flex flex-wrap gap-3">
             <a href="#contact" data-enquire="${h.id}" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 transition">${sold ? 'Request a similar horse' : 'Enquire about this horse'}</a>
-            <a href="https://wa.me/393664481244?text=${encodeURIComponent(wa)}" class="border border-white/25 text-sm px-6 py-3 rounded-full hover:border-white/55 transition">WhatsApp</a>
+            <a href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wa)}" class="border border-white/25 text-sm px-6 py-3 rounded-full hover:border-white/55 transition">WhatsApp</a>
           </div>
         </div>`;
       dialog.showModal();
@@ -483,9 +483,24 @@
       e.preventDefault();
       const f = new FormData(e.target);
       const body = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nPhone: ${f.get('phone') || '-'}\n\n${f.get('message')}`;
-      window.location.href = 'mailto:barbadoro.lorenzo01@gmail.com?subject=' + encodeURIComponent('Website enquiry — ' + f.get('name')) + '&body=' + encodeURIComponent(body);
+      window.location.href = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent('Website enquiry — ' + f.get('name')) + '&body=' + encodeURIComponent(body);
     });
 
+    // ── Site-wide contact details (single source: site.json) ──
+    let SITE = {};
+    async function loadSite() {
+      try {
+        const res = await fetch('site.json?v=' + Date.now());
+        if (!res.ok) throw new Error();
+        SITE = await res.json();
+      } catch (e) { return; }
+      document.querySelectorAll('[data-site]').forEach(el => { el.textContent = SITE[el.dataset.site] ?? ''; });
+      document.querySelectorAll('[data-href]').forEach(el => {
+        el.href = el.dataset.href.replace(/\{(\w+)\}/g, (_, k) => SITE[k] ?? '');
+      });
+    }
+
+    loadSite();
     loadHorses();
   </script>
 </body>
