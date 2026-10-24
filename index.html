@@ -90,6 +90,21 @@
     dialog::backdrop { background:rgba(0,0,0,.82); backdrop-filter:blur(6px); }
     .sheet { background:#121211; border:1px solid rgba(255,255,255,.08); border-radius:1.25rem; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.7); }
 
+    /* gallery inside the detail dialog */
+    .gal { position:relative; background:#151514; min-height:18rem; overflow:hidden; touch-action:pan-y; user-select:none; }
+    @media (min-width:768px) { .gal { min-height:32rem; } }
+    .gal img { position:absolute; inset:0; width:100%; height:100%; }
+    .gal .gal-bg { object-fit:cover; filter:blur(28px) brightness(.45); transform:scale(1.15); }
+    .gal .gal-fg { object-fit:contain; transition:opacity .25s ease; }
+    .placed-gal .gal-fg { filter:grayscale(.7) brightness(.85); }
+    .gal-btn { position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,.55); backdrop-filter:blur(6px); display:none; place-items:center; color:#fff; z-index:2; }
+    .gal-btn:hover { background:rgba(0,0,0,.8); }
+    .gal.multi .gal-btn { display:grid; }
+    .gal-dots { position:absolute; left:0; right:0; bottom:12px; display:none; justify-content:center; gap:7px; z-index:2; }
+    .gal.multi .gal-dots { display:flex; }
+    .gal-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.4); padding:0; }
+    .gal-dot.on { background:var(--gold); }
+
     .fab-wa { position:fixed; right:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; background:var(--gold); color:#000; display:grid; place-items:center; box-shadow:0 10px 28px rgba(0,0,0,.55); }
   </style>
   <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
@@ -432,6 +447,42 @@
       renderLists();
     }
 
+    // ── Photo gallery: probes folder/1.jpg, 2.jpg, … until one is missing ──
+    const photoCache = {};
+    function probePhotos(folder) {
+      if (photoCache[folder]) return photoCache[folder];
+      return photoCache[folder] = (async () => {
+        const urls = [];
+        for (let i = 1; i <= 12; i++) {
+          const u = `${folder}/${i}.jpg`;
+          const ok = await new Promise(r => { const im = new Image(); im.onload = () => r(true); im.onerror = () => r(false); im.src = u; });
+          if (!ok) break;
+          urls.push(u);
+        }
+        return urls;
+      })();
+    }
+    const gal = { urls: [], i: 0, token: 0 };
+    async function initGallery(folder) {
+      const token = ++gal.token;
+      const urls = await probePhotos(folder);
+      if (token !== gal.token || !urls.length) return;
+      gal.urls = urls; gal.i = 0;
+      const box = document.getElementById('gallery');
+      if (!box) return;
+      box.classList.toggle('multi', urls.length > 1);
+      document.getElementById('galDots').innerHTML = urls.map((_, n) => `<button type="button" class="gal-dot${n ? '' : ' on'}" data-n="${n}" aria-label="Photo ${n + 1}"></button>`).join('');
+    }
+    function showPhoto(n) {
+      if (gal.urls.length < 2) return;
+      gal.i = (n + gal.urls.length) % gal.urls.length;
+      const fg = document.getElementById('galImg'), bg = document.getElementById('galBg');
+      if (!fg) return;
+      fg.style.opacity = 0;
+      setTimeout(() => { fg.src = gal.urls[gal.i]; bg.src = gal.urls[gal.i]; fg.style.opacity = 1; }, 120);
+      document.querySelectorAll('#galDots .gal-dot').forEach((d, k) => d.classList.toggle('on', k === gal.i));
+    }
+
     // ── Detail dialog ──
     function openHorse(id) {
       const h = HORSES.find(x => String(x.id) === String(id));
@@ -441,8 +492,11 @@
       const rows = [['Gender', h.gender], ['Born', h.year], ['Bloodline', h.bloodline], ['Level', h.level]].filter(r => r[1]);
       const wa = sold ? `Hello, I saw ${h.name} was sold and I'm looking for a similar horse.` : `Hello, I'm interested in ${h.name}.`;
       dialogBody.innerHTML = `
-        <div class="relative bg-[#151514] min-h-[18rem] md:min-h-[32rem]">
-          ${img ? `<img src="${img}" alt="${esc(h.name)}" class="absolute inset-0 w-full h-full object-cover ${sold ? 'placed' : ''}" onerror="this.remove()">` : ''}
+        <div id="gallery" class="gal ${sold ? 'placed-gal' : ''}">
+          ${img ? `<img class="gal-bg" id="galBg" src="${img}" alt="" aria-hidden="true"><img class="gal-fg" id="galImg" src="${img}" alt="${esc(h.name)}">` : ''}
+          <button type="button" class="gal-btn" id="galPrev" aria-label="Previous photo" style="left:12px">←</button>
+          <button type="button" class="gal-btn" id="galNext" aria-label="Next photo" style="right:12px">→</button>
+          <div class="gal-dots" id="galDots"></div>
         </div>
         <div class="p-6 sm:p-9 flex flex-col">
           <span class="chip ${sold ? '' : 'chip-gold'} self-start">${sold ? 'Sold' : 'For sale'}</span>
@@ -458,6 +512,7 @@
         </div>`;
       dialog.showModal();
       document.body.style.overflow = 'hidden';
+      if (h.img_folder) initGallery(h.img_folder);
     }
     function closeDialog() { if (dialog.open) dialog.close(); }
     dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
@@ -465,6 +520,10 @@
     document.getElementById('dialogBackdrop').addEventListener('click', (e) => { if (e.target.id === 'dialogBackdrop') closeDialog(); });
 
     document.addEventListener('click', (e) => {
+      if (e.target.closest('#galPrev')) { showPhoto(gal.i - 1); return; }
+      if (e.target.closest('#galNext')) { showPhoto(gal.i + 1); return; }
+      const dot = e.target.closest('.gal-dot');
+      if (dot) { showPhoto(+dot.dataset.n); return; }
       const card = e.target.closest('.horse');
       if (card) { openHorse(card.dataset.id); return; }
       const enq = e.target.closest('[data-enquire]');
@@ -476,6 +535,19 @@
           : `Hello, I'm interested in ${h.name}. Could you send me more details, videos and vetting info?`;
         closeDialog();
       }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!dialog.open) return;
+      if (e.key === 'ArrowLeft') showPhoto(gal.i - 1);
+      if (e.key === 'ArrowRight') showPhoto(gal.i + 1);
+    });
+    let swipeX = null;
+    dialog.addEventListener('pointerdown', (e) => { if (e.target.closest('#gallery') && !e.target.closest('button')) swipeX = e.clientX; });
+    dialog.addEventListener('pointerup', (e) => {
+      if (swipeX === null) return;
+      const dx = e.clientX - swipeX; swipeX = null;
+      if (Math.abs(dx) > 40) showPhoto(gal.i + (dx < 0 ? 1 : -1));
     });
 
     // ── Enquiry form → clean email ──

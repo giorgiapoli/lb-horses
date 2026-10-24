@@ -250,5 +250,16 @@
     "status": "sold",
     "notes": "Mother jumps up to 1.50m",
     "img_folder": "img/filly-ermitage-kalone"
+  },
+  {
+    "id": 1792853527552,
+    "name": "Liscarrow Cooper",
+    "gender": "",
+    "year": 2017,
+    "bloodline": "Womanizer × Billy Congo",
+    "level": "",
+    "status": "sold",
+    "notes": "",
+    "img_folder": "img/liscarrow-cooper"
   }
 ]
