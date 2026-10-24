@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>L.B. Horses — Showjumpers for Sale Worldwide</title>
   <meta name="description" content="L.B. Horses sources, produces and sells quality showjumpers worldwide. Based in San Cesario sul Panaro (Modena), Italy. Global shipping." />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="theme-color" content="#0b0b0a" />
   <meta property="og:title" content="L.B. Horses — Showjumpers for Sale Worldwide" />
   <meta property="og:description" content="Sourcing, producing and selling quality showjumpers. Modena, Italy. Worldwide shipping." />
   <meta property="og:type" content="website" />
@@ -14,358 +14,281 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%23c9a24b%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2713%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23000%27 font-family=%27Georgia,serif%27%3ELB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root { --gold: #c9a24b; }
-    html { scroll-behavior: smooth; }
-    body { background:#0a0a0a; color:#ececea; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing:.005em; }
-    .serif { font-family:"Playfair Display", Georgia, "Times New Roman", serif; }
-    .gold { color: var(--gold); }
-    .bg-gold { background: var(--gold); }
-    .ring-gold { --tw-ring-color: var(--gold); }
-    .eyebrow { letter-spacing:.28em; text-transform:uppercase; font-size:.68rem; color:#a9a9a4; }
-
-    .gradient { background: radial-gradient(1100px 640px at 72% -18%, rgba(201,162,75,.14), rgba(0,0,0,0)); }
-    .card { background: rgba(255,255,255,0.028); border:1px solid rgba(255,255,255,0.07); transition: border-color .35s ease, transform .35s ease, background .35s ease; }
-    .card:hover { border-color: rgba(201,162,75,.38); transform: translateY(-4px); background: rgba(255,255,255,0.045); }
-    .shadow-soft { box-shadow: 0 18px 40px rgba(0,0,0,.5); }
-
-    /* image frame with hover zoom */
-    .media-wrap { overflow:hidden; }
-    .media-wrap img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
-    .media-wrap:hover img { transform: scale(1.06); }
-    .media { aspect-ratio:16/10; object-fit:cover; width:100%; display:block; }
-    .media-tall { aspect-ratio:4/5; object-fit:cover; object-position:center 35%; width:100%; display:block; }
-    .img-placeholder { aspect-ratio:16/10; background:linear-gradient(135deg,#171717,#242422); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:#3a3a38; }
-    .img-placeholder-tall { aspect-ratio:4/5; background:linear-gradient(135deg,#171717,#242422); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:#3a3a38; }
-
-    .sold-ribbon { position:absolute; top:14px; left:-42px; transform:rotate(-45deg); background:#9a1f36; color:#fff; padding:5px 48px; font-weight:600; letter-spacing:.08em; font-size:.66rem; box-shadow:0 8px 24px rgba(0,0,0,.55); z-index:2; }
-
-    /* header shrink on scroll */
-    #siteHeader { transition: padding .35s ease, background .35s ease, backdrop-filter .35s ease; }
-    #siteHeader.scrolled { background: rgba(8,8,8,.82); }
-    #siteHeader.scrolled .hbar { padding-top:.55rem; padding-bottom:.55rem; }
-    #siteHeader.scrolled .brand-title { font-size:1.05rem; }
-
-    /* scroll reveal */
-    .reveal { opacity:0; transform:translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform; }
-    .reveal.in { opacity:1; transform:none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity:1 !important; transform:none !important; transition:none; }
-      .media-wrap:hover img { transform:none; }
-      html { scroll-behavior:auto; }
-    }
-
-    /* focus visibility */
+    :root { --gold:#c9a24b; --ink:#0b0b0a; --cream:#f3efe6; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--ink); color:#ececea; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+    .serif { font-family:"Playfair Display",Georgia,"Times New Roman",serif; }
+    .gold { color:var(--gold); }
+    .bg-gold { background:var(--gold); }
+    .eyebrow { letter-spacing:.3em; text-transform:uppercase; font-size:.68rem; color:#a9a9a4; }
+    .shell { max-width:76rem; margin-inline:auto; padding-inline:1.25rem; }
+    section[id] { scroll-margin-top:64px; }
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
-    section[id] { scroll-margin-top:72px; }
 
-    /* sold horses: quieter, so available ones lead */
-    .is-sold .media-wrap img { filter:grayscale(.55) brightness(.8); }
-    .is-sold:hover .media-wrap img { filter:none; }
-
-    /* hero accent line + subtle section rule */
-    .gold-rule { width:44px; height:2px; background:var(--gold); border-radius:2px; }
-
-    /* mobile menu */
+    /* header: transparent over hero, solid after scroll */
+    #siteHeader { transition:background .35s ease, border-color .35s ease, padding .35s ease; border-bottom:1px solid transparent; }
+    #siteHeader.scrolled { background:rgba(11,11,10,.88); backdrop-filter:blur(10px); border-color:rgba(255,255,255,.08); }
+    .nav-link { position:relative; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
     #mobileMenu { display:none; }
     #mobileMenu.open { display:block; }
 
-    /* floating WhatsApp (mobile) */
-    .fab-wa { position:fixed; right:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; background:var(--gold); color:#000; display:grid; place-items:center; box-shadow:0 10px 28px rgba(0,0,0,.55); }
+    /* hero crossfade */
+    .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity 1.6s ease; transform:scale(1.04); }
+    .hero-slide.on { opacity:1; animation:kenburns 14s ease-out forwards; }
+    @keyframes kenburns { from { transform:scale(1.04); } to { transform:scale(1.12); } }
+    .hero-shade { background:linear-gradient(90deg,rgba(11,11,10,.7) 0%,rgba(11,11,10,.3) 55%,rgba(11,11,10,0) 100%),linear-gradient(180deg,rgba(11,11,10,.6) 0%,rgba(11,11,10,.3) 35%,rgba(11,11,10,.88) 88%,var(--ink) 100%); }
+    #top .eyebrow { color:#e4e2da; text-shadow:0 1px 12px rgba(0,0,0,.6); }
 
-    .link-underline { position:relative; }
-    .link-underline::after { content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
-    .link-underline:hover::after { width:100%; }
+    /* catalogue cards */
+    .horse { position:relative; overflow:hidden; border-radius:1rem; background:#151514; cursor:pointer; aspect-ratio:4/5; text-align:left; width:100%; display:block; }
+    .horse img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; transition:transform .9s cubic-bezier(.2,.7,.2,1); }
+    .horse:hover img { transform:scale(1.06); }
+    .horse .veil { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.88) 100%); }
+    .horse .cap { position:absolute; left:0; right:0; bottom:0; padding:1.25rem; }
+    .horse .more { opacity:0; transform:translateY(6px); transition:all .35s ease; }
+    .horse:hover .more, .horse:focus-visible .more { opacity:1; transform:none; }
+    @media (hover:none) { .horse .more { opacity:1; transform:none; } }
+    .horse.placeholder::before { content:"🐴"; position:absolute; inset:0; display:grid; place-items:center; font-size:3rem; opacity:.25; }
+    .chip { display:inline-flex; align-items:center; font-size:.7rem; letter-spacing:.04em; padding:.25rem .65rem; border-radius:999px; background:rgba(255,255,255,.12); backdrop-filter:blur(6px); }
+    .chip-gold { background:rgba(201,162,75,.2); color:#e3c57e; }
+    .feature { grid-column:span 2; aspect-ratio:auto; }
+    @media (max-width:639px) { .feature { grid-column:span 1; aspect-ratio:4/5; } }
+
+    .placed { filter:grayscale(.7) brightness(.85); }
+    .horse:hover .placed { filter:none; }
+
+    /* references carousel */
+    .snap { display:flex; gap:1.25rem; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:thin; scrollbar-color:#333 transparent; }
+    .snap > * { scroll-snap-align:start; flex:0 0 min(82%,22rem); }
+    .ref { position:relative; border-radius:1rem; overflow:hidden; aspect-ratio:3/4; background:#151514; }
+    .ref img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .ref .veil { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.9) 100%); }
+
+    /* reveal */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity:1; transform:none; }
+    @media (prefers-reduced-motion:reduce) {
+      .reveal { opacity:1 !important; transform:none !important; transition:none; }
+      .hero-slide, .hero-slide.on { animation:none; transition:none; }
+      .horse:hover img { transform:none; }
+      html { scroll-behavior:auto; }
+    }
+
+    /* contact on cream for contrast */
+    .paper { background:var(--cream); color:#1a1a18; }
+    .paper .field { background:#fff; border:1px solid #d9d3c4; color:#1a1a18; }
+    .paper .field::placeholder { color:#8d887b; }
+    .paper .field:focus { outline:2px solid var(--gold); outline-offset:0; }
+
+    /* modal */
+    dialog { background:transparent; padding:0; border:0; max-width:none; max-height:none; width:100%; height:100%; color:inherit; overflow:auto; }
+    dialog::backdrop { background:rgba(0,0,0,.82); backdrop-filter:blur(6px); }
+    .sheet { background:#121211; border:1px solid rgba(255,255,255,.08); border-radius:1.25rem; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.7); }
+
+    .fab-wa { position:fixed; right:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; background:var(--gold); color:#000; display:grid; place-items:center; box-shadow:0 10px 28px rgba(0,0,0,.55); }
   </style>
   <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
 
   <!-- ── HEADER ── -->
-  <header id="siteHeader" class="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur">
-    <div class="hbar mx-auto max-w-6xl px-4 py-3.5 flex items-center justify-between transition-all">
-      <a href="#top" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 rounded-full bg-gold grid place-items-center text-black font-semibold text-sm">LB</div>
-        <div class="leading-tight">
-          <div class="brand-title serif text-lg font-semibold tracking-wide transition-all">L.B. Horses</div>
-          <div class="text-[10px] uppercase tracking-[.22em] text-white/45">Showjumpers</div>
-        </div>
+  <header id="siteHeader" class="fixed top-0 inset-x-0 z-50">
+    <div class="shell py-4 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-gold grid place-items-center text-black font-semibold text-sm">LB</span>
+        <span class="serif text-lg font-semibold tracking-wide">L.B. Horses</span>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-[13px] text-white/60">
-        <a href="#horses" class="link-underline hover:text-white">Horses</a>
-        <a href="#references" class="link-underline hover:text-white">References</a>
-        <a href="#about" class="link-underline hover:text-white">About</a>
-        <a href="#contact" class="link-underline hover:text-white">Contact</a>
+      <nav class="hidden md:flex items-center gap-8 text-[13px] text-white/75" aria-label="Main">
+        <a href="#horses" class="nav-link hover:text-white">Horses</a>
+        <a href="#placed" class="nav-link hover:text-white">Placed</a>
+        <a href="#references" class="nav-link hover:text-white">References</a>
+        <a href="#about" class="nav-link hover:text-white">About</a>
       </nav>
       <div class="flex items-center gap-2.5">
-        <a href="https://wa.me/393664481244" class="hidden sm:inline-flex bg-gold text-black font-medium text-sm px-4 py-2 rounded-full hover:opacity-90 transition">WhatsApp</a>
-        <a href="#contact" class="inline-flex border border-white/20 text-sm px-4 py-2 rounded-full hover:border-white/45 transition">Enquire</a>
-        <button id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden w-10 h-10 grid place-items-center rounded-full border border-white/20">
+        <a href="#contact" class="bg-gold text-black font-medium text-sm px-5 py-2 rounded-full hover:opacity-90 transition">Enquire</a>
+        <button id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden w-10 h-10 grid place-items-center rounded-full border border-white/25">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
     </div>
-    <nav id="mobileMenu" class="md:hidden border-t border-white/10 bg-black/90 backdrop-blur">
-      <div class="mx-auto max-w-6xl px-4 py-3 flex flex-col text-[15px] text-white/80">
-        <a href="#horses" class="py-3 border-b border-white/[.06]">Horses</a>
-        <a href="#references" class="py-3 border-b border-white/[.06]">References</a>
-        <a href="#about" class="py-3 border-b border-white/[.06]">About</a>
+    <nav id="mobileMenu" class="md:hidden bg-black/90 backdrop-blur border-t border-white/10" aria-label="Mobile">
+      <div class="shell py-2 flex flex-col text-[15px] text-white/85">
+        <a href="#horses" class="py-3 border-b border-white/[.07]">Horses</a>
+        <a href="#placed" class="py-3 border-b border-white/[.07]">Placed</a>
+        <a href="#references" class="py-3 border-b border-white/[.07]">References</a>
+        <a href="#about" class="py-3 border-b border-white/[.07]">About</a>
         <a href="#contact" class="py-3">Contact</a>
       </div>
     </nav>
   </header>
 
   <!-- ── HERO ── -->
-  <section id="top" class="relative overflow-hidden gradient">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
-      <div class="reveal">
-        <div class="gold-rule mb-4"></div>
-        <p class="eyebrow">Modena, Italy · Worldwide shipping</p>
-        <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.12] mt-4">Showjumpers, <span class="gold">sourced and produced</span> for sport.</h1>
-        <p class="mt-5 text-[15px] md:text-base text-white/70 max-w-lg leading-relaxed">We select young and proven horses, produce them through training and competition, and place them with riders worldwide — with transparent vetting and full shipping support.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#horses" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 shadow-soft transition">View available horses</a>
-          <a href="#references" class="border border-white/20 text-sm px-6 py-3 rounded-full hover:border-white/45 transition">Top references</a>
-        </div>
-        <div id="heroStats" class="mt-9 flex gap-8 text-white/70"></div>
+  <section id="top" class="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="hero-slide on" style="background-image:url('img/hero/1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('img/hero/2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('img/hero/3.jpg')"></div>
+      <div class="absolute inset-0 hero-shade"></div>
+    </div>
+    <div class="shell relative pt-40 pb-10 md:pb-14 w-full">
+      <p class="eyebrow reveal">Modena, Italy · Worldwide shipping</p>
+      <h1 class="serif text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.04] mt-5 max-w-4xl reveal">
+        Showjumpers,<br><em class="gold font-normal">sourced &amp; produced</em><br>for sport.
+      </h1>
+      <p class="mt-6 text-[15px] md:text-lg text-white/75 max-w-xl leading-relaxed reveal">Young prospects and proven Grand Prix horses, placed with riders worldwide — with transparent vetting and full shipping support.</p>
+      <div class="mt-8 flex flex-wrap gap-3 reveal">
+        <a href="#horses" class="bg-gold text-black font-medium text-sm px-7 py-3.5 rounded-full hover:opacity-90 transition">View available horses</a>
+        <a href="#contact" class="border border-white/30 text-sm px-7 py-3.5 rounded-full hover:border-white/60 transition">Tell us your brief</a>
       </div>
-      <div class="relative reveal">
-        <div class="media-wrap rounded-2xl shadow-soft">
-          <img src="img/hero/1.jpg" alt="Showjumper in action" class="media" fetchpriority="high" onerror="this.closest('.media-wrap').style.display='none'" />
-        </div>
-        <div class="absolute -bottom-4 -right-3 bg-black/80 border border-white/10 rounded-xl px-4 py-3 backdrop-blur">
-          <div class="eyebrow">Headquarters</div>
-          <div class="text-sm font-medium mt-0.5">San Cesario sul Panaro · Modena</div>
-        </div>
-      </div>
+      <div id="heroStats" class="mt-12 pt-6 border-t border-white/15 grid grid-cols-3 max-w-xl gap-6"></div>
     </div>
   </section>
 
-  <!-- ── HORSES FOR SALE ── -->
-  <section id="horses" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 reveal">
+  <!-- ── AVAILABLE HORSES ── -->
+  <section id="horses" class="shell py-20 md:py-28">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 reveal">
       <div>
-        <p class="eyebrow">Catalogue</p>
-        <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Available horses</h2>
-        <p id="horsesSubtitle" class="mt-2 text-sm text-white/60">Verified details. Vetting and trial by appointment. Worldwide shipping.</p>
+        <p class="eyebrow">01 — Catalogue</p>
+        <h2 class="serif text-3xl md:text-5xl font-medium mt-3">Available horses</h2>
+        <p id="horsesSubtitle" class="mt-3 text-sm text-white/55">Vetting and trial by appointment. Worldwide shipping.</p>
       </div>
       <div class="flex flex-wrap items-center gap-2.5">
-        <input id="search" type="search" placeholder="Search name / bloodline"
-          class="bg-black/40 border border-white/15 text-sm px-4 py-2 rounded-lg focus:outline-none focus:ring ring-gold w-full sm:w-56" />
-        <select id="statusFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
-          <option value="all">All statuses</option>
-          <option value="for-sale">For sale</option>
-          <option value="sold">Sold</option>
-        </select>
-        <select id="yearFilter" class="bg-black/40 border border-white/15 text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring ring-gold">
-          <option value="all">All years</option>
+        <input id="search" type="search" placeholder="Search name / bloodline" aria-label="Search horses"
+          class="bg-white/[.05] border border-white/15 text-sm px-4 py-2.5 rounded-full focus:outline-none focus:border-[var(--gold)] w-full sm:w-60" />
+        <select id="yearFilter" aria-label="Filter by birth year" class="bg-white/[.05] border border-white/15 text-sm px-4 py-2.5 rounded-full focus:outline-none focus:border-[var(--gold)]">
+          <option value="all" class="text-black">All years</option>
         </select>
       </div>
     </div>
-
-    <div id="horseGrid" class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="col-span-full text-center py-16 text-white/40 serif italic">Loading horses…</div>
+    <div id="horseGrid" class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <div class="col-span-full text-center py-20 text-white/40 serif italic">Loading horses…</div>
     </div>
-
-    <p id="noResults" class="hidden mt-8 text-center text-sm text-white/40 italic">No horses match your search.</p>
-
-    <p class="mt-8 text-sm text-white/50">Looking for something specific?
-      <a href="#contact" class="gold link-underline">Tell us your brief</a> — we can source off-market horses as well.
-    </p>
+    <p id="noResults" class="hidden mt-10 text-center text-sm text-white/45 italic">No horses match your search.</p>
+    <p class="mt-10 text-sm text-white/55">Looking for something specific? <a href="#contact" class="gold underline underline-offset-4">Tell us your brief</a> — we can source off-market horses as well.</p>
   </section>
 
-  <!-- ── TOP REFERENCES ── -->
-  <section id="references" class="mx-auto max-w-6xl px-4 py-14 md:py-16 border-t border-white/[.06]">
-    <div class="reveal">
-      <p class="eyebrow">Track record</p>
-      <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Top references</h2>
-      <p class="mt-2 text-sm text-white/60">A selection of notable horses placed by L.B. Horses.</p>
-    </div>
-    <div class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/maurice/1.jpg" alt="Maurice" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
-        <div class="p-5">
-          <h3 class="serif text-xl font-semibold">Maurice</h3>
-          <ul class="mt-2 text-sm text-white/70 space-y-1">
-            <li>Olympic reference · Gelding by <span class="gold">Thunder</span></li>
-            <li>With Cian O'Connor</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/granit/1.jpg" alt="Granit" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
-        <div class="p-5">
-          <h3 class="serif text-xl font-semibold">Granit</h3>
-          <ul class="mt-2 text-sm text-white/70 space-y-1">
-            <li>Gelding by <span class="gold">Grey Top</span></li>
-            <li>Out of Rasmine Laudrup-Dufour · Denmark</li>
-            <li>Exceptional pedigree · Proven performance</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/extasy-courtil/1.jpg" alt="Extasy Courtil" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
-        <div class="p-5">
-          <h3 class="serif text-xl font-semibold">Extasy Courtil</h3>
-          <ul class="mt-2 text-sm text-white/70 space-y-1">
-            <li>Gelding by <span class="gold">Tzigano Massereuse</span></li>
-            <li>European Championship for Children · Riesenbeck (DE)</li>
-            <li>Top reference · Turkey 🇹🇷</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/moody/1.jpg" alt="Moody" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
-        <div class="p-5">
-          <h3 class="serif text-xl font-semibold">Moody</h3>
-          <ul class="mt-2 text-sm text-white/70 space-y-1">
-            <li>Gelding by <span class="gold">Uganositte</span></li>
-            <li>Competing 1.50m / 1.55m classes</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card rounded-2xl overflow-hidden reveal">
-        <div class="media-wrap"><img src="img/references/knass-b/1.jpg" alt="Knass B" class="media" loading="lazy" decoding="async" onerror="this.outerHTML='<div class=\'img-placeholder\'>🏇</div>'"/></div>
-        <div class="p-5">
-          <h3 class="serif text-xl font-semibold">Knass B</h3>
-          <ul class="mt-2 text-sm text-white/70 space-y-1">
-            <li>Gelding by <span class="gold">Toulon</span></li>
-            <li>🇺🇸 Competing 1.50m with Elisa Broz &amp; Cassio Rivetti</li>
-            <li>Scope, quality &amp; consistency</li>
-          </ul>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ── ABOUT ── -->
-  <section id="about" class="mx-auto max-w-6xl px-4 py-14 md:py-16 border-t border-white/[.06]">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
+  <!-- ── PLACED ── -->
+  <section id="placed" class="border-t border-white/[.07]">
+    <div class="shell py-20 md:py-24">
       <div class="reveal">
-        <p class="eyebrow">Who we are</p>
-        <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Italian roots, global reach</h2>
-        <p class="mt-4 text-[15px] text-white/70 leading-relaxed">L.B. Horses is a specialist dealer of quality showjumpers. From young prospects to Grand Prix performers, we select for bloodlines, temperament and athleticism — and place horses with top riders and ambitious amateurs across the world.</p>
-        <ul class="mt-6 grid sm:grid-cols-2 gap-3 text-sm text-white/75">
-          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Bespoke sourcing &amp; tryouts</li>
-          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> International shipping &amp; paperwork</li>
-          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Transparent vetting</li>
-          <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> After-sale support</li>
-        </ul>
+        <p class="eyebrow">02 — Recently placed</p>
+        <h2 class="serif text-3xl md:text-5xl font-medium mt-3">Sold &amp; <em class="gold font-normal">placed</em></h2>
+        <p class="mt-3 text-sm text-white/55 max-w-xl">A look at horses that found their rider. Want something similar? We can search for it.</p>
       </div>
-      <div class="reveal">
-        <div class="media-wrap rounded-2xl shadow-soft">
-          <img src="img/about.png" alt="L.B. Horses facility" class="media" loading="lazy" decoding="async" onerror="this.closest('.media-wrap').style.display='none'" />
+      <div id="placedGrid" class="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4"></div>
+    </div>
+  </section>
+
+  <!-- ── REFERENCES ── -->
+  <section id="references" class="border-t border-white/[.07] overflow-hidden">
+    <div class="shell py-20 md:py-28">
+      <div class="flex items-end justify-between gap-6 reveal">
+        <div>
+          <p class="eyebrow">03 — Track record</p>
+          <h2 class="serif text-3xl md:text-5xl font-medium mt-3">Top references</h2>
+          <p class="mt-3 text-sm text-white/55">A selection of notable horses placed by L.B. Horses.</p>
+        </div>
+        <div class="hidden sm:flex gap-2">
+          <button type="button" id="refPrev" aria-label="Previous" class="w-11 h-11 rounded-full border border-white/25 hover:border-white/60 transition grid place-items-center">←</button>
+          <button type="button" id="refNext" aria-label="Next" class="w-11 h-11 rounded-full border border-white/25 hover:border-white/60 transition grid place-items-center">→</button>
         </div>
       </div>
+      <div id="refTrack" class="snap mt-10" tabindex="0" aria-label="Top references"></div>
     </div>
   </section>
 
-  <!-- ── OWNER REFERENCES ── -->
-  <section id="owner" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
-    <div class="card rounded-2xl p-7 md:p-9 reveal">
-      <div class="grid md:grid-cols-2 gap-9 items-center">
-        <div class="order-2 md:order-1">
-          <div class="media-wrap rounded-2xl shadow-soft">
-            <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" class="media" loading="lazy" decoding="async" onerror="this.closest('.media-wrap').style.display='none'" />
+  <!-- ── ABOUT + FOUNDER ── -->
+  <section id="about" class="border-t border-white/[.07]">
+    <div class="shell py-20 md:py-28">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-5 reveal">
+          <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#151514]">
+            <img src="img/lorenzo/lorenzo.jpeg" alt="Lorenzo Barbadoro" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()" />
           </div>
         </div>
-        <div class="order-1 md:order-2">
-          <p class="eyebrow">The founder</p>
-          <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Lorenzo Barbadoro</h2>
-          <p class="mt-4 text-[15px] text-white/70 leading-relaxed">
-            Founder of <span class="gold font-medium">L.B. Horses</span>, with a proven record in top sport. His results and experience inform the way we select, produce and present every horse.
-          </p>
-          <div class="mt-6 grid grid-cols-2 gap-3">
-            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
-              <div class="serif text-2xl gold">2×</div>
-              <div class="text-xs text-white/60 mt-0.5">European Championships</div>
-            </div>
-            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
-              <div class="serif text-2xl gold">9×</div>
-              <div class="text-xs text-white/60 mt-0.5">Nations Cup</div>
-            </div>
-            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
-              <div class="serif text-2xl gold">2×</div>
-              <div class="text-xs text-white/60 mt-0.5">Italian Championship — Gold</div>
-            </div>
-            <div class="rounded-xl bg-white/[.04] border border-white/[.06] px-4 py-3">
-              <div class="serif text-2xl gold">1×</div>
-              <div class="text-xs text-white/60 mt-0.5">Italian Championship — Silver</div>
-            </div>
+        <div class="lg:col-span-7 reveal">
+          <p class="eyebrow">04 — Who we are</p>
+          <h2 class="serif text-3xl md:text-5xl font-medium mt-3 leading-tight">Italian roots,<br><em class="gold font-normal">global reach.</em></h2>
+          <p class="mt-6 text-[15px] md:text-base text-white/70 leading-relaxed max-w-2xl">L.B. Horses is a specialist dealer of quality showjumpers, founded by <span class="text-white">Lorenzo Barbadoro</span> — a rider with a proven record in top sport. His results and experience inform how we select, produce and present every horse: bloodlines, temperament and athleticism first.</p>
+
+          <div class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-xl overflow-hidden">
+            <div class="bg-[#0f0f0e] p-5"><div class="serif text-3xl gold">2×</div><div class="text-xs text-white/55 mt-1">European Championships</div></div>
+            <div class="bg-[#0f0f0e] p-5"><div class="serif text-3xl gold">9×</div><div class="text-xs text-white/55 mt-1">Nations Cup</div></div>
+            <div class="bg-[#0f0f0e] p-5"><div class="serif text-3xl gold">2×</div><div class="text-xs text-white/55 mt-1">Italian Champion — Gold</div></div>
+            <div class="bg-[#0f0f0e] p-5"><div class="serif text-3xl gold">1×</div><div class="text-xs text-white/55 mt-1">Italian Champion — Silver</div></div>
           </div>
-          <ul class="mt-6 space-y-2 text-sm text-white/70">
-            <li>• <span class="gold">European Championships</span> — Wiener Neustadt 2015; Oliva Nova 2022</li>
-            <li>• <span class="gold">Nations Cup</span> — 9 participations</li>
-            <li>• <span class="gold">Italian Championships (Gold)</span> — 2014, 2022</li>
-            <li>• <span class="gold">Italian Championships (Silver)</span> — 2015</li>
+          <p class="mt-4 text-xs text-white/45">European Championships: Wiener Neustadt 2015, Oliva Nova 2022 · Italian Gold: 2014, 2022 · Silver: 2015</p>
+
+          <ul class="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm text-white/80">
+            <li class="flex gap-4"><span class="serif gold text-lg leading-none">i.</span> Bespoke sourcing &amp; tryouts</li>
+            <li class="flex gap-4"><span class="serif gold text-lg leading-none">ii.</span> International shipping &amp; paperwork</li>
+            <li class="flex gap-4"><span class="serif gold text-lg leading-none">iii.</span> Transparent vetting</li>
+            <li class="flex gap-4"><span class="serif gold text-lg leading-none">iv.</span> After-sale support</li>
           </ul>
         </div>
       </div>
+    </div>
+    <div class="relative h-56 md:h-80 overflow-hidden" aria-hidden="true">
+      <img src="img/about.png" alt="" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" onerror="this.parentElement.remove()" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0b0b0a] via-transparent to-transparent"></div>
     </div>
   </section>
 
   <!-- ── CONTACT ── -->
-  <section id="contact" class="mx-auto max-w-6xl px-4 py-14 md:py-16">
-    <div class="card rounded-2xl p-7 md:p-9 reveal">
-      <div class="grid md:grid-cols-2 gap-9">
-        <div>
-          <p class="eyebrow">Enquiries</p>
-          <h2 class="serif text-2xl md:text-3xl font-semibold mt-2">Get in touch</h2>
-          <p class="mt-3 text-[15px] text-white/70 leading-relaxed">Tell us what you're looking for — height, age, record and budget — and we'll propose suitable horses. We sell worldwide.</p>
-          <div class="mt-6 space-y-2.5 text-sm text-white/75">
-            <div><span class="text-white/45">Company</span><br><span class="gold font-medium">L.B. Horses S.R.L.S.</span></div>
-            <div><span class="text-white/45">Phone / WhatsApp</span><br><a class="gold link-underline" href="https://wa.me/393664481244">+39 366 448 1244</a></div>
-            <div><span class="text-white/45">Email</span><br><a class="gold link-underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a></div>
-            <div><span class="text-white/45">VAT (P.IVA)</span><br>03984250369</div>
-            <div><span class="text-white/45">Location</span><br>San Cesario sul Panaro (Modena), Italy</div>
-          </div>
-        </div>
-        <form id="contactForm" class="space-y-3.5">
-          <div class="grid sm:grid-cols-2 gap-3.5">
-            <input required name="name" placeholder="Your name" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
-            <input required type="email" name="email" placeholder="Email" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
-          </div>
-          <input name="phone" placeholder="Phone / WhatsApp" class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold" />
-          <textarea required name="message" rows="5" placeholder="Tell us about the horse you need (age, height, level, budget)." class="w-full bg-black/40 border border-white/15 text-sm px-4 py-3 rounded-lg focus:outline-none focus:ring ring-gold"></textarea>
-          <div class="flex flex-wrap items-center gap-3">
-            <button type="submit" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 transition">Send enquiry</button>
-            <a class="inline-flex items-center gap-2 border border-white/20 text-sm px-5 py-3 rounded-full hover:border-white/45 transition" href="https://wa.me/393664481244">Chat on WhatsApp</a>
-          </div>
-          <p class="text-xs text-white/45">By submitting, you agree to be contacted by L.B. Horses regarding your enquiry.</p>
-        </form>
+  <section id="contact" class="paper">
+    <div class="shell py-20 md:py-28 grid lg:grid-cols-2 gap-12 lg:gap-20">
+      <div class="reveal">
+        <p class="eyebrow" style="color:#7d7868">05 — Enquiries</p>
+        <h2 class="serif text-3xl md:text-5xl font-medium mt-3 leading-tight">Tell us what<br>you're looking for.</h2>
+        <p class="mt-5 text-[15px] leading-relaxed text-[#55524a] max-w-md">Height, age, record and budget — we'll propose suitable horses. We sell worldwide.</p>
+        <dl class="mt-9 space-y-5 text-sm">
+          <div><dt class="text-[#7d7868]">Phone / WhatsApp</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline" href="https://wa.me/393664481244">+39 366 448 1244</a></dd></div>
+          <div><dt class="text-[#7d7868]">Email</dt><dd class="mt-0.5 text-lg serif"><a class="hover:underline break-all" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a></dd></div>
+          <div><dt class="text-[#7d7868]">Location</dt><dd class="mt-0.5">San Cesario sul Panaro (Modena), Italy</dd></div>
+        </dl>
       </div>
+      <form id="contactForm" class="space-y-3.5 reveal">
+        <div class="grid sm:grid-cols-2 gap-3.5">
+          <input required name="name" placeholder="Your name" aria-label="Your name" class="field w-full text-sm px-4 py-3.5 rounded-lg" />
+          <input required type="email" name="email" placeholder="Email" aria-label="Email" class="field w-full text-sm px-4 py-3.5 rounded-lg" />
+        </div>
+        <input name="phone" placeholder="Phone / WhatsApp" aria-label="Phone" class="field w-full text-sm px-4 py-3.5 rounded-lg" />
+        <textarea required name="message" rows="6" placeholder="Tell us about the horse you need (age, height, level, budget)." aria-label="Message" class="field w-full text-sm px-4 py-3.5 rounded-lg"></textarea>
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <button type="submit" class="bg-[#0b0b0a] text-white font-medium text-sm px-7 py-3.5 rounded-full hover:opacity-85 transition">Send enquiry</button>
+          <a class="inline-flex items-center border border-[#0b0b0a]/30 text-sm px-6 py-3.5 rounded-full hover:border-[#0b0b0a] transition" href="https://wa.me/393664481244">Chat on WhatsApp</a>
+        </div>
+        <p class="text-xs text-[#7d7868]">By submitting, you agree to be contacted by L.B. Horses regarding your enquiry.</p>
+      </form>
     </div>
   </section>
 
   <!-- ── FOOTER ── -->
   <footer class="border-t border-white/10">
-    <div class="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-white/60">
+    <div class="shell py-12 grid md:grid-cols-3 gap-8 text-sm text-white/60">
       <div>
-        <div class="serif text-lg font-semibold gold">L.B. Horses</div>
+        <div class="serif text-xl font-semibold gold">L.B. Horses</div>
         <p class="mt-2">Showjumpers for sale worldwide.</p>
-        <p class="mt-3 flex gap-4 text-white/50"><a class="link-underline hover:text-white" href="#horses">Horses</a><a class="link-underline hover:text-white" href="#references">References</a><a class="link-underline hover:text-white" href="#about">About</a><a class="link-underline hover:text-white" href="#contact">Contact</a></p>
-      </div>
-      <div>
-        <div class="text-white/45">Address</div>
-        <p>San Cesario sul Panaro (MO), Italy</p>
-        <div class="text-white/45 mt-3">VAT (P.IVA)</div>
-        <p>03984250369</p>
-      </div>
-      <div>
-        <div class="text-white/45">Contact</div>
-        <p class="mt-1">
-          <a class="gold link-underline" href="tel:+393664481244">+39 366 448 1244</a><br>
-          <a class="gold link-underline" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a>
+        <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-white/50">
+          <a class="hover:text-white" href="#horses">Horses</a><a class="hover:text-white" href="#references">References</a><a class="hover:text-white" href="#about">About</a><a class="hover:text-white" href="#contact">Contact</a>
         </p>
-        <p class="mt-3 text-white/40">© <span id="year"></span> L.B. Horses. All rights reserved.</p>
+      </div>
+      <div>
+        <div class="text-white/40">Company</div>
+        <p class="mt-1">L.B. Horses S.R.L.S.<br>San Cesario sul Panaro (MO), Italy<br>VAT (P.IVA) 03984250369</p>
+      </div>
+      <div>
+        <div class="text-white/40">Contact</div>
+        <p class="mt-1">
+          <a class="gold hover:underline" href="tel:+393664481244">+39 366 448 1244</a><br>
+          <a class="gold hover:underline break-all" href="mailto:barbadoro.lorenzo01@gmail.com">barbadoro.lorenzo01@gmail.com</a>
+        </p>
+        <p class="mt-4 text-white/40">© <span id="year"></span> L.B. Horses. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -374,184 +297,188 @@
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.1A8.5 8.5 0 1 1 21 12Z"/></svg>
   </a>
 
-  <!-- ── SCRIPTS ── -->
+  <!-- ── HORSE DETAIL ── -->
+  <dialog id="horseDialog" aria-label="Horse details">
+    <div class="min-h-full grid place-items-center p-3 sm:p-6" id="dialogBackdrop">
+      <div class="sheet w-full max-w-4xl relative">
+        <button type="button" id="dialogClose" aria-label="Close" class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-black/60 backdrop-blur grid place-items-center hover:bg-black/80">✕</button>
+        <div id="dialogBody" class="grid md:grid-cols-2"></div>
+      </div>
+    </div>
+  </dialog>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-    // ── Mobile menu ──
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    // ── Header / mobile menu ──
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+    const menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');
     menuBtn.addEventListener('click', () => {
       const open = mobileMenu.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', open);
+      header.classList.toggle('scrolled', open || window.scrollY > 40);
     });
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); onScroll();
     }));
 
-    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-    // ── Header shrink on scroll ──
-    const header = document.getElementById('siteHeader');
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // ── Scroll reveal (IntersectionObserver, with safe fallback) ──
-    const supportsIO = 'IntersectionObserver' in window;
-    const revealAll = (scope) => (scope || document).querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
-    let revealObserver = null;
-
-    if (supportsIO) {
-      revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    // ── Hero crossfade ──
+    const slides = [...document.querySelectorAll('.hero-slide')];
+    let si = 0;
+    if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(() => {
+        slides[si].classList.remove('on');
+        si = (si + 1) % slides.length;
+        slides[si].classList.add('on');
+      }, 6500);
     }
 
+    // ── Scroll reveal ──
+    const supportsIO = 'IntersectionObserver' in window;
+    const io = supportsIO ? new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold:.1, rootMargin:'0px 0px -40px 0px' }) : null;
     function observeReveals(scope) {
-      if (!supportsIO) { revealAll(scope); return; }
-      (scope || document).querySelectorAll('.reveal:not(.in)').forEach((el, i) => {
-        el.style.transitionDelay = Math.min(i * 60, 240) + 'ms';
-        revealObserver.observe(el);
-      });
+      (scope || document).querySelectorAll('.reveal:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in'));
     }
     observeReveals();
 
-    // ── Load horses from horses.json ──
+    // ── References ──
+    const REFS = [
+      { name:'Maurice', img:'img/references/maurice/1.jpg', lines:['Olympic reference · Gelding by Thunder','With Cian O\'Connor'] },
+      { name:'Granit', img:'img/references/granit/1.jpg', lines:['Gelding by Grey Top','Out of Rasmine Laudrup-Dufour · Denmark','Exceptional pedigree · Proven performance'] },
+      { name:'Extasy Courtil', img:'img/references/extasy-courtil/1.jpg', lines:['Gelding by Tzigano Massereuse','European Championship for Children · Riesenbeck (DE)','Top reference · Turkey 🇹🇷'] },
+      { name:'Moody', img:'img/references/moody/1.jpg', lines:['Gelding by Uganositte','Competing 1.50m / 1.55m classes'] },
+      { name:'Knass B', img:'img/references/knass-b/1.jpg', lines:['Gelding by Toulon','🇺🇸 Competing 1.50m with Elisa Broz & Cassio Rivetti','Scope, quality & consistency'] }
+    ];
+    const refTrack = document.getElementById('refTrack');
+    refTrack.innerHTML = REFS.map(r => `
+      <article class="ref">
+        <img src="${r.img}" alt="${esc(r.name)}" loading="lazy" decoding="async" onerror="this.remove()">
+        <div class="veil"></div>
+        <div class="absolute inset-x-0 bottom-0 p-5">
+          <h3 class="serif text-2xl font-medium">${esc(r.name)}</h3>
+          <ul class="mt-2 text-sm text-white/75 space-y-0.5">${r.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
+        </div>
+      </article>`).join('');
+    const step = () => refTrack.clientWidth * 0.6;
+    document.getElementById('refPrev').addEventListener('click', () => refTrack.scrollBy({ left:-step(), behavior:'smooth' }));
+    document.getElementById('refNext').addEventListener('click', () => refTrack.scrollBy({ left: step(), behavior:'smooth' }));
+
+    // ── Horses ──
+    let HORSES = [];
+    const dialog = document.getElementById('horseDialog');
+    const dialogBody = document.getElementById('dialogBody');
+
+    function horseCard(h, opts = {}) {
+      const sold = h.status === 'sold';
+      const img = h.img_folder ? h.img_folder + '/1.jpg' : '';
+      const meta = [h.gender, h.year].filter(Boolean).join(' · ');
+      const big = opts.feature ? 'feature' : '';
+      return `
+        <button type="button" class="horse ${big} reveal" data-id="${h.id}" aria-label="${esc(h.name)} — view details">
+          ${img ? `<img src="${img}" alt="${esc(h.name)}" loading="lazy" decoding="async" class="${sold ? 'placed' : ''}" onerror="this.parentElement.classList.add('placeholder');this.remove()">` : ''}
+          <span class="veil"></span>
+          <span class="cap">
+            <span class="flex flex-wrap gap-1.5 mb-2">
+              ${sold ? '<span class="chip">Sold</span>' : (h.level ? `<span class="chip chip-gold">${esc(h.level)}</span>` : '')}
+            </span>
+            <span class="serif block ${opts.feature ? 'text-3xl' : 'text-xl'} font-medium leading-tight">${esc(h.name)}</span>
+            <span class="block text-[13px] text-white/70 mt-1">${esc(meta)}${h.bloodline ? ' · ' + esc(h.bloodline) : ''}</span>
+            <span class="more block text-[13px] gold mt-2">View details →</span>
+          </span>
+        </button>`;
+    }
+
+    function renderLists() {
+      const q = (document.getElementById('search').value || '').toLowerCase().trim();
+      const year = document.getElementById('yearFilter').value;
+      const match = h => (!q || (h.name||'').toLowerCase().includes(q) || (h.bloodline||'').toLowerCase().includes(q)) && (year === 'all' || String(h.year) === year);
+      const avail = HORSES.filter(h => h.status !== 'sold' && match(h));
+      const sold = HORSES.filter(h => h.status === 'sold' && match(h));
+
+      const grid = document.getElementById('horseGrid');
+      grid.innerHTML = avail.map((h, i) => horseCard(h, { feature: i === 0 && !q && year === 'all' })).join('');
+      document.getElementById('noResults').classList.toggle('hidden', avail.length > 0 || HORSES.length === 0);
+      document.getElementById('placedGrid').innerHTML = sold.map(h => horseCard(h)).join('');
+      document.getElementById('placed').style.display = sold.length || !HORSES.length ? '' : 'none';
+      observeReveals(grid); observeReveals(document.getElementById('placedGrid'));
+    }
+
     async function loadHorses() {
-      let horses = [];
       try {
         const res = await fetch('horses.json?v=' + Date.now());
         if (!res.ok) throw new Error();
-        horses = await res.json();
+        HORSES = await res.json();
       } catch (e) {
-        document.getElementById('horseGrid').innerHTML =
-          '<div class="col-span-full text-center py-12 text-white/40 italic">Could not load horses data.</div>';
+        document.getElementById('horseGrid').innerHTML = '<div class="col-span-full text-center py-16 text-white/45 italic">Could not load horses data.</div>';
         return;
       }
+      const forSale = HORSES.filter(h => h.status !== 'sold').length;
+      const sold = HORSES.filter(h => h.status === 'sold').length;
+      document.getElementById('heroStats').innerHTML = `
+        <div><div class="serif text-3xl gold">${forSale}</div><div class="eyebrow mt-1">Available now</div></div>
+        <div><div class="serif text-3xl gold">${sold}+</div><div class="eyebrow mt-1">Placed &amp; sold</div></div>
+        <div><div class="serif text-3xl gold">30+</div><div class="eyebrow mt-1">Countries shipped</div></div>`;
+      document.getElementById('horsesSubtitle').textContent = `${forSale} horses currently available · Vetting and trial by appointment · Worldwide shipping.`;
 
-      // Dynamic hero stats
-      const forSaleCount = horses.filter(h => h.status !== 'sold').length;
-      const soldCount = horses.filter(h => h.status === 'sold').length;
-      const heroStats = document.getElementById('heroStats');
-      if (heroStats) {
-        heroStats.innerHTML = `
-          <div><div class="serif text-2xl gold">${forSaleCount}</div><div class="eyebrow mt-1">Available now</div></div>
-          <div><div class="serif text-2xl gold">${soldCount}+</div><div class="eyebrow mt-1">Placed &amp; sold</div></div>
-          <div><div class="serif text-2xl gold">30+</div><div class="eyebrow mt-1">Countries shipped</div></div>`;
-      }
-
-      // Dynamic catalogue subtitle
-      const sub = document.getElementById('horsesSubtitle');
-      if (sub) sub.textContent = `${forSaleCount} horses currently available · Vetting and trial by appointment · Worldwide shipping.`;
-
-      // Populate year filter (birth years, newest first)
-      const years = [...new Set(horses.map(h => h.year).filter(Boolean))].sort((a, b) => b - a);
-      const yearSelect = document.getElementById('yearFilter');
-      years.forEach(y => {
-        const o = document.createElement('option');
-        o.value = y; o.textContent = y;
-        yearSelect.appendChild(o);
-      });
-
-      renderGrid(horses);
-
-      const search = document.getElementById('search');
-      const statusFilter = document.getElementById('statusFilter');
-      const noResults = document.getElementById('noResults');
-
-      function applyFilters() {
-        const q = (search.value || '').toLowerCase().trim();
-        const status = statusFilter.value;
-        const year = yearSelect.value;
-        let visible = 0;
-        document.querySelectorAll('#horseGrid article').forEach(card => {
-          const name = (card.dataset.name || '').toLowerCase();
-          const blood = (card.dataset.bloodline || '').toLowerCase();
-          const matchText = !q || name.includes(q) || blood.includes(q);
-          const matchStatus = status === 'all' || card.dataset.status === status;
-          const matchYear = year === 'all' || card.dataset.year === year;
-          const show = matchText && matchStatus && matchYear;
-          card.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        noResults.classList.toggle('hidden', visible !== 0);
-      }
-      [search, statusFilter, yearSelect].forEach(el => el.addEventListener('input', applyFilters));
+      const ys = [...new Set(HORSES.map(h => h.year).filter(Boolean))].sort((a,b) => b - a);
+      const ysel = document.getElementById('yearFilter');
+      ys.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; o.className = 'text-black'; ysel.appendChild(o); });
+      ['search','yearFilter'].forEach(id => document.getElementById(id).addEventListener('input', renderLists));
+      renderLists();
     }
 
-    function renderGrid(horses) {
-      const grid = document.getElementById('horseGrid');
-      if (!horses.length) {
-        grid.innerHTML = '<div class="col-span-full text-center py-12 text-white/40 serif italic">No horses listed at the moment.</div>';
-        return;
-      }
-
-      const sorted = [...horses].sort((a, b) => {
-        if (a.status === 'sold' && b.status !== 'sold') return 1;
-        if (a.status !== 'sold' && b.status === 'sold') return -1;
-        return 0;
-      });
-
-      grid.innerHTML = sorted.map(h => {
-        const isSold = h.status === 'sold';
-        const imgSrc = h.img_folder ? h.img_folder + '/1.jpg' : '';
-        const imgHtml = imgSrc
-          ? `<div class="media-wrap"><img src="${imgSrc}" loading="lazy" decoding="async" alt="${esc(h.name)}" class="media-tall"
-               onerror="this.closest('.media-wrap').outerHTML='<div class=\\'img-placeholder-tall\\'>🐴</div>'"></div>`
-          : `<div class="img-placeholder-tall">🐴</div>`;
-
-        const levelHtml = h.level
-          ? `<span class="px-2 py-1 rounded-full bg-white/10 text-xs">Level ${esc(h.level)}</span>` : '';
-        const notesHtml = h.notes
-          ? `<span class="text-xs text-white/60">${esc(h.notes)}</span>` : '';
-
-        const enquireText = isSold ? 'Request similar' : 'Enquire';
-        const statusLabel = isSold ? 'Sold' : 'For sale';
-        const statusClass = isSold ? 'bg-white/10 text-white/60' : 'bg-gold/15 text-gold';
-        const ribbon = isSold ? '<div class="sold-ribbon">SOLD</div>' : '';
-
-        return `
-          <article class="card rounded-2xl overflow-hidden relative reveal${isSold ? ' is-sold' : ''}"
-            data-status="${h.status}"
-            data-year="${h.year || ''}"
-            data-name="${esc(h.name)}"
-            data-bloodline="${esc(h.bloodline)}">
-            ${ribbon}
-            ${imgHtml}
-            <div class="p-5">
-              <h3 class="serif text-xl font-semibold">${esc(h.name)}</h3>
-              <p class="text-sm text-white/60 mt-1">
-                ${[h.gender, h.year].filter(Boolean).join(' · ')}
-                ${h.bloodline ? '· by <span class="gold">' + esc(h.bloodline) + '</span>' : ''}
-              </p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">${levelHtml}${notesHtml}</div>
-              <div class="mt-4 flex items-center justify-between border-t border-white/[.06] pt-3">
-                <span class="text-[11px] tracking-wider px-2.5 py-1 rounded-full ${statusClass}">${statusLabel}</span>
-                <a href="#contact" data-horse="${esc(h.name)}" data-sold="${isSold}" class="enquire-link text-sm gold link-underline">${enquireText} →</a>
-              </div>
-            </div>
-          </article>`;
-      }).join('');
-
-      // Animate the freshly injected cards
-      observeReveals(grid);
+    // ── Detail dialog ──
+    function openHorse(id) {
+      const h = HORSES.find(x => String(x.id) === String(id));
+      if (!h) return;
+      const sold = h.status === 'sold';
+      const img = h.img_folder ? h.img_folder + '/1.jpg' : '';
+      const rows = [['Gender', h.gender], ['Born', h.year], ['Bloodline', h.bloodline], ['Level', h.level]].filter(r => r[1]);
+      const wa = sold ? `Hello, I saw ${h.name} was sold and I'm looking for a similar horse.` : `Hello, I'm interested in ${h.name}.`;
+      dialogBody.innerHTML = `
+        <div class="relative bg-[#151514] min-h-[18rem] md:min-h-[32rem]">
+          ${img ? `<img src="${img}" alt="${esc(h.name)}" class="absolute inset-0 w-full h-full object-cover ${sold ? 'placed' : ''}" onerror="this.remove()">` : ''}
+        </div>
+        <div class="p-6 sm:p-9 flex flex-col">
+          <span class="chip ${sold ? '' : 'chip-gold'} self-start">${sold ? 'Sold' : 'For sale'}</span>
+          <h3 class="serif text-3xl sm:text-4xl font-medium mt-4 leading-tight">${esc(h.name)}</h3>
+          ${h.notes ? `<p class="mt-2 text-white/65">${esc(h.notes)}</p>` : ''}
+          <dl class="mt-7 divide-y divide-white/10 text-sm">
+            ${rows.map(([k, v]) => `<div class="flex justify-between gap-6 py-3"><dt class="text-white/45">${k}</dt><dd class="text-right ${k === 'Bloodline' ? 'gold' : ''}">${esc(v)}</dd></div>`).join('')}
+          </dl>
+          <div class="mt-auto pt-8 flex flex-wrap gap-3">
+            <a href="#contact" data-enquire="${h.id}" class="bg-gold text-black font-medium text-sm px-6 py-3 rounded-full hover:opacity-90 transition">${sold ? 'Request a similar horse' : 'Enquire about this horse'}</a>
+            <a href="https://wa.me/393664481244?text=${encodeURIComponent(wa)}" class="border border-white/25 text-sm px-6 py-3 rounded-full hover:border-white/55 transition">WhatsApp</a>
+          </div>
+        </div>`;
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
     }
+    function closeDialog() { if (dialog.open) dialog.close(); }
+    dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+    document.getElementById('dialogClose').addEventListener('click', closeDialog);
+    document.getElementById('dialogBackdrop').addEventListener('click', (e) => { if (e.target.id === 'dialogBackdrop') closeDialog(); });
 
-    // ── Prefill the enquiry with the chosen horse ──
-    document.getElementById('horseGrid').addEventListener('click', (e) => {
-      const a = e.target.closest('.enquire-link');
-      if (!a) return;
-      const msg = document.querySelector('#contactForm textarea[name="message"]');
-      const sold = a.dataset.sold === 'true';
-      msg.value = sold
-        ? `Hello, I saw ${a.dataset.horse} was sold. I'm looking for a similar horse (age, height, level, budget): `
-        : `Hello, I'm interested in ${a.dataset.horse}. Could you send me more details, videos and vetting info?`;
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.horse');
+      if (card) { openHorse(card.dataset.id); return; }
+      const enq = e.target.closest('[data-enquire]');
+      if (enq) {
+        const h = HORSES.find(x => String(x.id) === enq.dataset.enquire);
+        const sold = h && h.status === 'sold';
+        document.querySelector('#contactForm textarea').value = !h ? '' : sold
+          ? `Hello, I saw ${h.name} was sold. I'm looking for a similar horse (age, height, level, budget): `
+          : `Hello, I'm interested in ${h.name}. Could you send me more details, videos and vetting info?`;
+        closeDialog();
+      }
     });
 
-    // ── Enquiry form: build a clean, readable email ──
+    // ── Enquiry form → clean email ──
     document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const f = new FormData(e.target);
