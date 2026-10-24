@@ -385,13 +385,17 @@
     document.getElementById('refNext').addEventListener('click', () => refTrack.scrollBy({ left: step(), behavior:'smooth' }));
 
     // ── Horses ──
+    // Photos keep the same file names when replaced, so tag URLs with a 10-minute bucket
+    // (matches the server cache lifetime) to avoid browsers showing a stale picture.
+    const IMG_V = Math.floor(Date.now() / 600000);
+    const photoUrl = (folder, n) => `${folder}/${n}.jpg?v=${IMG_V}`;
     let HORSES = [];
     const dialog = document.getElementById('horseDialog');
     const dialogBody = document.getElementById('dialogBody');
 
     function horseCard(h, opts = {}) {
       const sold = h.status === 'sold';
-      const img = h.img_folder ? h.img_folder + '/1.jpg' : '';
+      const img = h.img_folder ? photoUrl(h.img_folder, 1) : '';
       const meta = [h.gender, h.year].filter(Boolean).join(' · ');
       const big = opts.feature ? 'feature' : '';
       return `
@@ -455,7 +459,7 @@
       return photoCache[folder] = (async () => {
         const urls = [];
         for (let i = 1; i <= 12; i++) {
-          const u = `${folder}/${i}.jpg`;
+          const u = photoUrl(folder, i);
           const ok = await new Promise(r => { const im = new Image(); im.onload = () => r(true); im.onerror = () => r(false); im.src = u; });
           if (!ok) break;
           urls.push(u);
@@ -489,7 +493,7 @@
       const h = HORSES.find(x => String(x.id) === String(id));
       if (!h) return;
       const sold = h.status === 'sold';
-      const img = h.img_folder ? h.img_folder + '/1.jpg' : '';
+      const img = h.img_folder ? photoUrl(h.img_folder, 1) : '';
       const rows = [['Gender', h.gender], ['Born', h.year], ['Bloodline', h.bloodline], ['Level', h.level]].filter(r => r[1]);
       const wa = sold ? `Hello, I saw ${h.name} was sold and I'm looking for a similar horse.` : `Hello, I'm interested in ${h.name}.`;
       dialogBody.innerHTML = `
